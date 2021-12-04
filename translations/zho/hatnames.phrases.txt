@@ -1,0 +1,477 @@
+"Phrases"
+{
+    "Hand Gib"
+	{
+		"zho"			"布吉手臂"
+	}
+
+	"Boomer Head"
+	{
+		"zho"			"Boomer的頭"
+	}
+
+	"Head Gib"
+	{
+		"zho"			"布吉頭"
+	}
+
+	"Circular Saw"
+	{
+		"zho"			"圓鋸"
+	}
+
+	"Red Emergency Light"
+	{
+		"zho"			"紅色應急燈"
+	}
+
+	"Alligator"
+	{
+		"zho"			"鱷魚布偶"
+	}
+
+	"Mr Mustachio"
+	{
+		"zho"			"穆斯塔基奧先生"
+	}
+
+	"Traffic Cone"
+	{
+		"zho"			"交通錐"
+	}
+
+	"Teddy Bear"
+	{
+		"zho"			"泰迪熊"
+	}
+
+	"Toilet Seat"
+	{
+		"zho"			"馬桶座圈"
+	}
+
+	"Water bottle"
+	{
+		"zho"			"礦泉水瓶"
+	}
+
+	"Dock Pylon"
+	{
+		"zho"			"碼頭塔"
+	}
+
+	"Life Ring"
+	{
+		"zho"			"救生圈"
+	}
+
+	"Construction Light"
+	{
+		"zho"			"施工燈"
+	}
+
+	"Speech Quote"
+	{
+		"zho"			"我無言了"
+	}
+
+	"Smoker Tongue"
+	{
+		"zho"			"Smoker的舌頭"
+	}
+
+	"Ceiling Fan Blades"
+	{
+		"zho"			"吊扇葉片"
+	}
+
+	"F-18 Jet Plane"
+	{
+		"zho"			"F-18噴氣式飛機"
+	}
+
+	"Civilian Radio"
+	{
+		"zho"			"對講機"
+	}
+
+	"Riot Faceplate"
+	{
+		"zho"			"防暴面板"
+	}
+
+	"Styrofoam Cups"
+	{
+		"zho"			"發泡膠杯"
+	}
+
+	"Bug Lamp Zapper"
+	{
+		"zho"			"驅蟲燈"
+	}
+
+	"BBQ Grill"
+	{
+		"zho"			"燒烤爐"
+	}
+
+	"Luggage Cart"
+	{
+		"zho"			"購物車"
+	}
+
+	"Lantern"
+	{
+		"zho"			"燈籠"
+	}
+
+	"Exit Sign"
+	{
+		"zho"			"出口指示牌"
+	}
+
+	"Garden Hose"
+	{
+		"zho"			"園藝軟管"
+	}
+
+	"Pink Flamingo"
+	{
+		"zho"			"粉紅天鵝"
+	}
+
+	"Money Pile"
+	{
+		"zho"			"錢堆"
+	}
+
+	"Elephant"
+	{
+		"zho"			"大象布偶"
+	}
+
+	"Giraffe"
+	{
+		"zho"			"長頸鹿布偶"
+	}
+
+	"Popcorn Box"
+	{
+		"zho"			"爆米花盒"
+	}
+
+	"Gnome Closet"
+	{
+		"zho"			"小矮人的櫃子尸"
+	}
+
+	"Snake"
+	{
+		"zho"			"蛇布偶"
+	}
+
+	"Toaster"
+	{
+		"zho"			"烤麵包機"
+	}
+
+	"Doll"
+	{
+		"zho"			"玩具娃娃"
+	}
+
+	"Hub Cap"
+	{
+		"zho"			"輪轂蓋"
+	}
+
+	"Mannequin Hand"
+	{
+		"zho"			"模特手"
+	}
+
+	"Desk Lamp"
+	{
+		"zho"			"檯燈"
+	}
+
+	"Big Helicopter"
+	{
+		"zho"			"大直升機"
+	}
+
+	"News Helicopter"
+	{
+		"zho"			"新聞直升機"
+	}
+
+	"Missile"
+	{
+		"zho"			"導彈"
+	}
+
+	"Fishing Boat"
+	{
+		"zho"			"漁船"
+	}
+
+	"Childs Trike"
+	{
+		"zho"			"三輪車"
+	}
+
+	"Deer Head"
+	{
+		"zho"			"鹿頭布偶"
+	}
+
+	"Saucepan"
+	{
+		"zho"			"平底煲"
+	}
+
+	"Frying Pan"
+	{
+		"zho"			"平底鍋"
+	}
+
+	"Skull"
+	{
+		"zho"			"顱骨"
+	}
+
+	"Case of Beer"
+	{
+		"zho"			"啤酒箱"
+	}
+
+	"Office Chair"
+	{
+		"zho"			"辦公椅"
+	}
+
+	"Graveyard Cross"
+	{
+		"zho"			"墓地十字架"
+	}
+
+	"Kiddyland Rocket"
+	{
+		"zho"			"火箭"
+	}
+
+	"Toilet"
+	{
+		"zho"			"馬桶"
+	}
+
+	"Lamp Shade"
+	{
+		"zho"			"燈罩"
+	}
+
+	"Saddle"
+	{
+		"zho"			"馬鞍"
+	}
+
+	"Wheel Chair"
+	{
+		"zho"			"輪椅"
+	}
+
+	"Mega Phone"
+	{
+		"zho"			"擴音器"
+	}
+
+	"Flood lights"
+	{
+		"zho"			"投光燈"
+	}
+
+	"Car Tire"
+	{
+		"zho"			"汽車輪胎"
+	}
+
+	"Ceiling Fan"
+	{
+		"zho"			"吊扇"
+	}
+
+	"Fan"
+	{
+		"zho"			"風扇"
+	}
+
+	"Pot Plant 1"
+	{
+		"zho"			"盆栽植物1"
+	}
+
+	"Pot Plant 2"
+	{
+		"zho"			"盆栽植物2"
+	}
+
+	"Ironing Board"
+	{
+		"zho"			"燙衣板"
+	}
+
+	"Coin"
+	{
+		"zho"			"錢幣"
+	}
+
+	"Jockey"
+	{
+		"zho"			"迷你Jockey"
+	}
+
+	"Gift"
+	{
+		"zho"			"禮物盒"
+	}
+
+	"Fire Hydrant"
+	{
+		"zho"			"消防栓"
+	}
+
+	"Gnome"
+	{
+		"zho"			"小矮人"
+	}
+
+	"Sail Boat"
+	{
+		"zho"			"帆船"
+	}
+
+	"Red Bulkhead Light"
+	{
+		"zho"			"紅色隔板燈"
+	}
+
+	"Wheel Hubcap"
+	{
+		"zho"			"輪轂罩"
+	}
+
+	"Graveyard Cross"
+	{
+		"zho"			"墓地十字架"
+	}
+
+	"Tea Pot"
+	{
+		"zho"			"茶壺"
+	}
+
+	"Pyrotechnics"
+	{
+		"zho"			"煙火"
+	}
+
+	"Coffee Maker"
+	{
+		"zho"			"咖啡機"
+	}
+
+	"Kettle"
+	{
+		"zho"			"水壺"
+	}
+
+	"TV"
+	{
+		"zho"			"電視機"
+	}
+
+	"Lamp Shade 1"
+	{
+		"zho"			"燈罩1"
+	}
+
+	"Lamp Shade 2"
+	{
+		"zho"			"燈罩2"
+	}
+
+	"Lamp Shade 3"
+	{
+		"zho"			"燈罩3"
+	}
+
+	"Dog Food"
+	{
+		"zho"			"狗糧"
+	}
+
+	"Dalek Flash Light"
+	{
+		"zho"			"手電筒"
+	}
+
+	"Ball Light"
+	{
+		"zho"			"球燈"
+	}
+
+	"Cash Register"
+	{
+		"zho"			"收銀機"
+	}
+
+	"Gun Trophy 1"
+	{
+		"zho"			"槍戰利品1"
+	}
+
+	"Gun Trophy 2"
+	{
+		"zho"			"槍戰利品2"
+	}
+
+	"Spitter Arms"
+	{
+		"zho"			"飛濺武器"
+	}
+
+	"Jockey Claws"
+	{
+		"zho"			"Jockey的爪"
+	}
+
+	"Tank Claws"
+	{
+		"zho"			"Tank的爪"
+	}
+
+	"Grenade Shell"
+	{
+		"zho"			"手榴彈殼"
+	}
+
+	"Propane Cylinder"
+	{
+		"zho"			"丙烷氣瓶"
+	}
+
+	"Medkit Cap"
+	{
+		"zho"			"藥盒蓋"
+	}
+
+	"Riot Shield"
+	{
+		"zho"			"防暴盾牌"
+	}
+
+	"Tug Boat"
+	{
+		"zho"			"拖船"
+	}
+}

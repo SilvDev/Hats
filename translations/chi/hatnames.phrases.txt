@@ -1,0 +1,477 @@
+"Phrases"
+{
+    "Hand Gib"
+	{
+		"chi"			"布吉手臂"
+	}
+
+	"Boomer Head"
+	{
+		"chi"			"Boomer的头"
+	}
+
+	"Head Gib"
+	{
+		"chi"			"布吉头"
+	}
+
+	"Circular Saw"
+	{
+		"chi"			"圆锯"
+	}
+
+	"Red Emergency Light"
+	{
+		"chi"			"红色应急灯"
+	}
+
+	"Alligator"
+	{
+		"chi"			"鳄鱼布偶"
+	}
+
+	"Mr Mustachio"
+	{
+		"chi"			"穆斯塔基奥先生"
+	}
+
+	"Traffic Cone"
+	{
+		"chi"			"交通锥"
+	}
+
+	"Teddy Bear"
+	{
+		"chi"			"泰迪熊"
+	}
+
+	"Toilet Seat"
+	{
+		"chi"			"马桶座圈"
+	}
+
+	"Water bottle"
+	{
+		"chi"			"矿泉水瓶"
+	}
+
+	"Dock Pylon"
+	{
+		"chi"			"码头塔"
+	}
+
+	"Life Ring"
+	{
+		"chi"			"救生圈"
+	}
+
+	"Construction Light"
+	{
+		"chi"			"施工灯"
+	}
+
+	"Speech Quote"
+	{
+		"chi"			"我无言了"
+	}
+
+	"Smoker Tongue"
+	{
+		"chi"			"Smoker的舌头"
+	}
+
+	"Ceiling Fan Blades"
+	{
+		"chi"			"吊扇叶片"
+	}
+
+	"F-18 Jet Plane"
+	{
+		"chi"			"F-18喷气式飞机"
+	}
+
+	"Civilian Radio"
+	{
+		"chi"			"对讲机"
+	}
+
+	"Riot Faceplate"
+	{
+		"chi"			"防暴面板"
+	}
+
+	"Styrofoam Cups"
+	{
+		"chi"			"发泡胶杯"
+	}
+
+	"Bug Lamp Zapper"
+	{
+		"chi"			"驱虫灯"
+	}
+
+	"BBQ Grill"
+	{
+		"chi"			"烧烤炉"
+	}
+
+	"Luggage Cart"
+	{
+		"chi"			"购物车"
+	}
+
+	"Lantern"
+	{
+		"chi"			"灯笼"
+	}
+
+	"Exit Sign"
+	{
+		"chi"			"出口指示牌"
+	}
+
+	"Garden Hose"
+	{
+		"chi"			"园艺软管"
+	}
+
+	"Pink Flamingo"
+	{
+		"chi"			"粉红天鹅"
+	}
+
+	"Money Pile"
+	{
+		"chi"			"钱堆"
+	}
+
+	"Elephant"
+	{
+		"chi"			"大象布偶"
+	}
+
+	"Giraffe"
+	{
+		"chi"			"长颈鹿布偶"
+	}
+
+	"Popcorn Box"
+	{
+		"chi"			"爆米花盒"
+	}
+
+	"Gnome Closet"
+	{
+		"chi"			"小矮人的柜子"
+	}
+
+	"Snake"
+	{
+		"chi"			"蛇布偶"
+	}
+
+	"Toaster"
+	{
+		"chi"			"烤面包机"
+	}
+
+	"Doll"
+	{
+		"chi"			"玩具娃娃"
+	}
+
+	"Hub Cap"
+	{
+		"chi"			"轮毂盖"
+	}
+
+	"Mannequin Hand"
+	{
+		"chi"			"模特手"
+	}
+
+	"Desk Lamp"
+	{
+		"chi"			"台灯"
+	}
+
+	"Big Helicopter"
+	{
+		"chi"			"大直升机"
+	}
+
+	"News Helicopter"
+	{
+		"chi"			"新闻直升机"
+	}
+
+	"Missile"
+	{
+		"chi"			"导弹"
+	}
+
+	"Fishing Boat"
+	{
+		"chi"			"渔船"
+	}
+
+	"Childs Trike"
+	{
+		"chi"			"三轮车"
+	}
+
+	"Deer Head"
+	{
+		"chi"			"鹿头布偶"
+	}
+
+	"Saucepan"
+	{
+		"chi"			"平底煲"
+	}
+
+	"Frying Pan"
+	{
+		"chi"			"平底锅"
+	}
+
+	"Skull"
+	{
+		"chi"			"颅骨"
+	}
+
+	"Case of Beer"
+	{
+		"chi"			"啤酒箱"
+	}
+
+	"Office Chair"
+	{
+		"chi"			"办公椅"
+	}
+
+	"Graveyard Cross"
+	{
+		"chi"			"墓地十字架"
+	}
+
+	"Kiddyland Rocket"
+	{
+		"chi"			"火箭"
+	}
+
+	"Toilet"
+	{
+		"chi"			"马桶"
+	}
+
+	"Lamp Shade"
+	{
+		"chi"			"灯罩"
+	}
+
+	"Saddle"
+	{
+		"chi"			"马鞍"
+	}
+
+	"Wheel Chair"
+	{
+		"chi"			"轮椅"
+	}
+
+	"Mega Phone"
+	{
+		"chi"			"扩音器"
+	}
+
+	"Flood lights"
+	{
+		"chi"			"投光灯"
+	}
+
+	"Car Tire"
+	{
+		"chi"			"汽车轮胎"
+	}
+
+	"Ceiling Fan"
+	{
+		"chi"			"吊扇"
+	}
+
+	"Fan"
+	{
+		"chi"			"风扇"
+	}
+
+	"Pot Plant 1"
+	{
+		"chi"			"盆栽植物1"
+	}
+
+	"Pot Plant 2"
+	{
+		"chi"			"盆栽植物2"
+	}
+
+	"Ironing Board"
+	{
+		"chi"			"烫衣板"
+	}
+
+	"Coin"
+	{
+		"chi"			"钱币"
+	}
+
+	"Jockey"
+	{
+		"chi"			"迷你Jockey"
+	}
+
+	"Gift"
+	{
+		"chi"			"礼物盒"
+	}
+
+	"Fire Hydrant"
+	{
+		"chi"			"消防栓"
+	}
+
+	"Gnome"
+	{
+		"chi"			"小矮人"
+	}
+
+	"Sail Boat"
+	{
+		"chi"			"帆船"
+	}
+
+	"Red Bulkhead Light"
+	{
+		"chi"			"红色隔板灯"
+	}
+
+	"Wheel Hubcap"
+	{
+		"chi"			"轮毂罩"
+	}
+
+	"Graveyard Cross"
+	{
+		"chi"			"墓地十字架"
+	}
+
+	"Tea Pot"
+	{
+		"chi"			"茶壶"
+	}
+
+	"Pyrotechnics"
+	{
+		"chi"			"烟火"
+	}
+
+	"Coffee Maker"
+	{
+		"chi"			"咖啡机"
+	}
+
+	"Kettle"
+	{
+		"chi"			"水壶"
+	}
+
+	"TV"
+	{
+		"chi"			"电视机"
+	}
+
+	"Lamp Shade 1"
+	{
+		"chi"			"灯罩1"
+	}
+
+	"Lamp Shade 2"
+	{
+		"chi"			"灯罩2"
+	}
+
+	"Lamp Shade 3"
+	{
+		"chi"			"灯罩3"
+	}
+
+	"Dog Food"
+	{
+		"chi"			"狗粮"
+	}
+
+	"Dalek Flash Light"
+	{
+		"chi"			"手电筒"
+	}
+
+	"Ball Light"
+	{
+		"chi"			"球灯"
+	}
+
+	"Cash Register"
+	{
+		"chi"			"收款机"
+	}
+
+	"Gun Trophy 1"
+	{
+		"chi"			"枪战利品1"
+	}
+
+	"Gun Trophy 2"
+	{
+		"chi"			"枪战利品2"
+	}
+
+	"Spitter Arms"
+	{
+		"chi"			"飞溅武器"
+	}
+
+	"Jockey Claws"
+	{
+		"chi"			"Jockey的爪"
+	}
+
+	"Tank Claws"
+	{
+		"chi"			"Tank的爪"
+	}
+
+	"Grenade Shell"
+	{
+		"chi"			"手榴弹壳"
+	}
+
+	"Propane Cylinder"
+	{
+		"chi"			"丙烷气瓶"
+	}
+
+	"Medkit Cap"
+	{
+		"chi"			"药盒盖"
+	}
+
+	"Riot Shield"
+	{
+		"chi"			"防暴盾牌"
+	}
+
+	"Tug Boat"
+	{
+		"chi"			"拖船"
+	}
+}
