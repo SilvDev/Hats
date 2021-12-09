@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.38"
+#define PLUGIN_VERSION 		"1.39"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,10 @@
 
 ========================================================================================
 	Change Log:
+
+1.39 (09-Dec-2021)
+	- Changed command "sm_hat" to accept "rand" or "random" as a parameter option to give a random hat.
+	- Updated the "chi" and "zho" translation "hatnames.phrases.txt" files to be correct. Thanks to "NoroHime".
 
 1.38 (03-Dec-2021)
 	- Added "Off" option to the menu. Requested by "kot4404".
@@ -428,7 +432,7 @@ public void OnPluginStart()
 
 
 	// Commands
-	RegConsoleCmd("sm_hat",			CmdHat,								"Displays a menu of hats allowing players to change what they are wearing.");
+	RegConsoleCmd("sm_hat",			CmdHat,								"Displays a menu of hats allowing players to change what they are wearing. Optional args: [0 - 128 or hat name or \"random\"]");
 	RegConsoleCmd("sm_hatoff",		CmdHatOff,							"Toggle to turn on or off the ability of wearing hats.");
 	RegConsoleCmd("sm_hatshow",		CmdHatShow,							"Toggle to see or hide your own hat.");
 	RegConsoleCmd("sm_hatview",		CmdHatShow,							"Toggle to see or hide your own hat.");
@@ -1207,6 +1211,16 @@ public Action CmdHat(int client, int args)
 				{
 					ExternalView(client);
 				}
+			}
+		}
+		else if( strncmp(sTemp, "rand", 4, false) == 0 )
+		{
+			RemoveHat(client);
+
+			if( CreateHat(client, GetRandomInt(1, g_iCount) - 1) )
+			{
+				ExternalView(client);
+				return Plugin_Handled;
 			}
 		}
 		else

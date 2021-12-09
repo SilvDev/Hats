@@ -1,477 +1,383 @@
 "Phrases"
 {
-    "Hand Gib"
+	"Hat 1"
 	{
-		"chi"			"布吉手臂"
+		"chi"		"一手遮天"
 	}
-
-	"Boomer Head"
+	"Hat 2"
 	{
-		"chi"			"Boomer的头"
+		"chi"		"Boomer 头"
 	}
-
-	"Head Gib"
+	"Hat 3"
 	{
-		"chi"			"布吉头"
+		"chi"		"假面"
 	}
-
-	"Circular Saw"
+	"Hat 4"
 	{
-		"chi"			"圆锯"
+		"chi"		"圆锯"
 	}
-
-	"Red Emergency Light"
+	"Hat 5"
 	{
-		"chi"			"红色应急灯"
+		"chi"		"红色应急灯"
 	}
-
-	"Alligator"
+	"Hat 6"
 	{
-		"chi"			"鳄鱼布偶"
+		"chi"		"鳄鱼"
 	}
-
-	"Mr Mustachio"
+	"Hat 7"
 	{
-		"chi"			"穆斯塔基奥先生"
+		"chi"		"胡子先生"
 	}
-
-	"Traffic Cone"
+	"Hat 8"
 	{
-		"chi"			"交通锥"
+		"chi"		"路障"
 	}
-
-	"Teddy Bear"
+	"Hat 9"
 	{
-		"chi"			"泰迪熊"
+		"chi"		"玩具熊"
 	}
-
-	"Toilet Seat"
+	"Hat 10"
 	{
-		"chi"			"马桶座圈"
+		"chi"		"便器"
 	}
-
-	"Water bottle"
+	"Hat 11"
 	{
-		"chi"			"矿泉水瓶"
+		"chi"		"水瓶"
 	}
-
-	"Dock Pylon"
+	"Hat 12"
 	{
-		"chi"			"码头塔"
+		"chi"		"码头塔"
 	}
-
-	"Life Ring"
+	"Hat 13"
 	{
-		"chi"			"救生圈"
+		"chi"		"救生圈"
 	}
-
-	"Construction Light"
+	"Hat 14"
 	{
-		"chi"			"施工灯"
+		"chi"		"建筑灯"
 	}
-
-	"Speech Quote"
+	"Hat 15"
 	{
-		"chi"			"我无言了"
+		"chi"		"聊天气泡"
 	}
-
-	"Smoker Tongue"
+	"Hat 16"
 	{
-		"chi"			"Smoker的舌头"
+		"chi"		"舌头"
 	}
-
-	"Ceiling Fan Blades"
+	"Hat 17"
 	{
-		"chi"			"吊扇叶片"
+		"chi"		"吊扇叶片"
 	}
-
-	"F-18 Jet Plane"
+	"Hat 18"
 	{
-		"chi"			"F-18喷气式飞机"
+		"chi"		"F-18 喷气式飞机"
 	}
-
-	"Civilian Radio"
+	"Hat 19"
 	{
-		"chi"			"对讲机"
+		"chi"		"对讲机"
 	}
-
-	"Riot Faceplate"
+	"Hat 20"
 	{
-		"chi"			"防暴面板"
+		"chi"		"防爆罩"
 	}
-
-	"Styrofoam Cups"
+	"Hat 21"
 	{
-		"chi"			"发泡胶杯"
+		"chi"		"泡沫塑料杯"
 	}
-
-	"Bug Lamp Zapper"
+	"Hat 22"
 	{
-		"chi"			"驱虫灯"
+		"chi"		"灭蚊灯"
 	}
-
-	"BBQ Grill"
+	"Hat 23"
 	{
-		"chi"			"烧烤炉"
+		"chi"		"烧烤架"
 	}
-
-	"Luggage Cart"
+	"Hat 24"
 	{
-		"chi"			"购物车"
+		"chi"		"超市手推车"
 	}
-
-	"Lantern"
+	"Hat 25"
 	{
-		"chi"			"灯笼"
+		"chi"		"手提灯"
 	}
-
-	"Exit Sign"
+	"Hat 26"
 	{
-		"chi"			"出口指示牌"
+		"chi"		"出口标记"
 	}
-
-	"Garden Hose"
+	"Hat 27"
 	{
-		"chi"			"园艺软管"
+		"chi"		"软管"
 	}
-
-	"Pink Flamingo"
+	"Hat 28"
 	{
-		"chi"			"粉红天鹅"
+		"chi"		"粉红火烈鸟"
 	}
-
-	"Money Pile"
+	"Hat 29"
 	{
-		"chi"			"钱堆"
+		"chi"		"钱堆"
 	}
-
-	"Elephant"
+	"Hat 30"
 	{
-		"chi"			"大象布偶"
+		"chi"		"大象"
 	}
-
-	"Giraffe"
+	"Hat 31"
 	{
-		"chi"			"长颈鹿布偶"
+		"chi"		"长颈鹿"
 	}
-
-	"Popcorn Box"
+	"Hat 32"
 	{
-		"chi"			"爆米花盒"
+		"chi"		"爆米花"
 	}
-
-	"Gnome Closet"
+	"Hat 33"
 	{
-		"chi"			"小矮人的柜子"
+		"chi"		"矮人架"
 	}
-
-	"Snake"
+	"Hat 34"
 	{
-		"chi"			"蛇布偶"
+		"chi"		"蛇"
 	}
-
-	"Toaster"
+	"Hat 35"
 	{
-		"chi"			"烤面包机"
+		"chi"		"面包机"
 	}
-
-	"Doll"
+	"Hat 36"
 	{
-		"chi"			"玩具娃娃"
+		"chi"		"娃娃"
 	}
-
-	"Hub Cap"
+	"Hat 37"
 	{
-		"chi"			"轮毂盖"
+		"chi"		"轮胎盖"
 	}
-
-	"Mannequin Hand"
+	"Hat 38"
 	{
-		"chi"			"模特手"
+		"chi"		"模型手"
 	}
-
-	"Desk Lamp"
+	"Hat 39"
 	{
-		"chi"			"台灯"
+		"chi"		"台灯"
 	}
-
-	"Big Helicopter"
+	"Hat 40"
 	{
-		"chi"			"大直升机"
+		"chi"		"大直升机"
 	}
-
-	"News Helicopter"
+	"Hat 41"
 	{
-		"chi"			"新闻直升机"
+		"chi"		"新闻直升机"
 	}
-
-	"Missile"
+	"Hat 42"
 	{
-		"chi"			"导弹"
+		"chi"		"导弹"
 	}
-
-	"Fishing Boat"
+	"Hat 43"
 	{
-		"chi"			"渔船"
+		"chi"		"渔船"
 	}
-
-	"Childs Trike"
+	"Hat 44"
 	{
-		"chi"			"三轮车"
+		"chi"		"儿童三轮车"
 	}
-
-	"Deer Head"
+	"Hat 45"
 	{
-		"chi"			"鹿头布偶"
+		"chi"		"鹿头"
 	}
-
-	"Saucepan"
+	"Hat 46"
 	{
-		"chi"			"平底煲"
+		"chi"		"平底锅"
 	}
-
-	"Frying Pan"
+	"Hat 47"
 	{
-		"chi"			"平底锅"
+		"chi"		"煎锅"
 	}
-
-	"Skull"
+	"Hat 48"
 	{
-		"chi"			"颅骨"
+		"chi"		"骷髅头"
 	}
-
-	"Case of Beer"
+	"Hat 49"
 	{
-		"chi"			"啤酒箱"
+		"chi"		"啤酒箱"
 	}
-
-	"Office Chair"
+	"Hat 50"
 	{
-		"chi"			"办公椅"
+		"chi"		"办公椅子"
 	}
-
-	"Graveyard Cross"
+	"Hat 51"
 	{
-		"chi"			"墓地十字架"
+		"chi"		"墓地十字架"
 	}
-
-	"Kiddyland Rocket"
+	"Hat 52"
 	{
-		"chi"			"火箭"
+		"chi"		"儿童乐园火箭"
 	}
-
-	"Toilet"
+	"Hat 53"
 	{
-		"chi"			"马桶"
+		"chi"		"厕所"
 	}
-
-	"Lamp Shade"
+	"Hat 54"
 	{
-		"chi"			"灯罩"
+		"chi"		"灯罩"
 	}
-
-	"Saddle"
+	"Hat 55"
 	{
-		"chi"			"马鞍"
+		"chi"		"马鞍"
 	}
-
-	"Wheel Chair"
+	"Hat 56"
 	{
-		"chi"			"轮椅"
+		"chi"		"轮椅"
 	}
-
-	"Mega Phone"
+	"Hat 57"
 	{
-		"chi"			"扩音器"
+		"chi"		"大喇叭"
 	}
-
-	"Flood lights"
+	"Hat 58"
 	{
-		"chi"			"投光灯"
+		"chi"		"泛光灯"
 	}
-
-	"Car Tire"
+	"Hat 59"
 	{
-		"chi"			"汽车轮胎"
+		"chi"		"汽车轮胎"
 	}
-
-	"Ceiling Fan"
+	"Hat 60"
 	{
-		"chi"			"吊扇"
+		"chi"		"吊扇"
 	}
-
-	"Fan"
+	"Hat 61"
 	{
-		"chi"			"风扇"
+		"chi"		"涡轮扇"
 	}
-
-	"Pot Plant 1"
+	"Hat 62"
 	{
-		"chi"			"盆栽植物1"
+		"chi"		"盆栽植物 1"
 	}
-
-	"Pot Plant 2"
+	"Hat 63"
 	{
-		"chi"			"盆栽植物2"
+		"chi"		"盆栽植物 2"
 	}
-
-	"Ironing Board"
+	"Hat 64"
 	{
-		"chi"			"烫衣板"
+		"chi"		"熨衣板"
 	}
-
-	"Coin"
+	"Hat 65"
 	{
-		"chi"			"钱币"
+		"chi"		"金币"
 	}
-
-	"Jockey"
+	"Hat 66"
 	{
-		"chi"			"迷你Jockey"
+		"chi"		"Jockey"
 	}
-
-	"Gift"
+	"Hat 67"
 	{
-		"chi"			"礼物盒"
+		"chi"		"礼物"
 	}
-
-	"Fire Hydrant"
+	"Hat 68"
 	{
-		"chi"			"消防栓"
+		"chi"		"消防栓"
 	}
-
-	"Gnome"
+	"Hat 69"
 	{
-		"chi"			"小矮人"
+		"chi"		"矮人"
 	}
-
-	"Sail Boat"
+	"Hat 70"
 	{
-		"chi"			"帆船"
+		"chi"		"帆船"
 	}
-
-	"Red Bulkhead Light"
+	"Hat 71"
 	{
-		"chi"			"红色隔板灯"
+		"chi"		"红色舱壁灯"
 	}
-
-	"Wheel Hubcap"
+	"Hat 72"
 	{
-		"chi"			"轮毂罩"
+		"chi"		"轮毂盖"
 	}
-
-	"Graveyard Cross"
+	"Hat 73"
 	{
-		"chi"			"墓地十字架"
+		"chi"		"墓地十字架"
 	}
-
-	"Tea Pot"
+	"Hat 74"
 	{
-		"chi"			"茶壶"
+		"chi"		"泡泡茶壶"
 	}
-
-	"Pyrotechnics"
+	"Hat 75"
 	{
-		"chi"			"烟火"
+		"chi"		"烟火"
 	}
-
-	"Coffee Maker"
+	"Hat 76"
 	{
-		"chi"			"咖啡机"
+		"chi"		"咖啡机"
 	}
-
-	"Kettle"
+	"Hat 77"
 	{
-		"chi"			"水壶"
+		"chi"		"水壶"
 	}
-
-	"TV"
+	"Hat 78"
 	{
-		"chi"			"电视机"
+		"chi"		"电视"
 	}
-
-	"Lamp Shade 1"
+	"Hat 79"
 	{
-		"chi"			"灯罩1"
+		"chi"		"灯罩 1"
 	}
-
-	"Lamp Shade 2"
+	"Hat 80"
 	{
-		"chi"			"灯罩2"
+		"chi"		"灯罩 2"
 	}
-
-	"Lamp Shade 3"
+	"Hat 81"
 	{
-		"chi"			"灯罩3"
+		"chi"		"灯罩 3"
 	}
-
-	"Dog Food"
+	"Hat 82"
 	{
-		"chi"			"狗粮"
+		"chi"		"狗粮"
 	}
-
-	"Dalek Flash Light"
+	"Hat 83"
 	{
-		"chi"			"手电筒"
+		"chi"		"手电筒"
 	}
-
-	"Ball Light"
+	"Hat 84"
 	{
-		"chi"			"球灯"
+		"chi"		"球灯"
 	}
-
-	"Cash Register"
+	"Hat 85"
 	{
-		"chi"			"收款机"
+		"chi"		"收银机"
 	}
-
-	"Gun Trophy 1"
+	"Hat 86"
 	{
-		"chi"			"枪战利品1"
+		"chi"		"枪架 1"
 	}
-
-	"Gun Trophy 2"
+	"Hat 87"
 	{
-		"chi"			"枪战利品2"
+		"chi"		"枪架 2"
 	}
-
-	"Spitter Arms"
+	"Hat 88"
 	{
-		"chi"			"飞溅武器"
+		"chi"		"Spitter 手"
 	}
-
-	"Jockey Claws"
+	"Hat 89"
 	{
-		"chi"			"Jockey的爪"
+		"chi"		"Jockey 爪子"
 	}
-
-	"Tank Claws"
+	"Hat 90"
 	{
-		"chi"			"Tank的爪"
+		"chi"		"Tank 爪子"
 	}
-
-	"Grenade Shell"
+	"Hat 91"
 	{
-		"chi"			"手榴弹壳"
+		"chi"		"炮弹"
 	}
-
-	"Propane Cylinder"
+	"Hat 92"
 	{
-		"chi"			"丙烷气瓶"
+		"chi"		"丙烷气瓶"
 	}
-
-	"Medkit Cap"
+	"Hat 93"
 	{
-		"chi"			"药盒盖"
+		"chi"		"医疗包帽"
 	}
-
-	"Riot Shield"
+	"Hat 94"
 	{
-		"chi"			"防暴盾牌"
+		"chi"		"防爆盾"
 	}
-
-	"Tug Boat"
+	"Hat 95"
 	{
-		"chi"			"拖船"
+		"chi"		"游艇"
 	}
 }

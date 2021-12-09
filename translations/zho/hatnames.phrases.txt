@@ -1,477 +1,383 @@
 "Phrases"
 {
-    "Hand Gib"
+	"Hat 1"
 	{
-		"zho"			"布吉手臂"
+		"zho"		"布吉手臂"
 	}
-
-	"Boomer Head"
+	"Hat 2"
 	{
-		"zho"			"Boomer的頭"
+		"zho"		"Boomer的頭"
 	}
-
-	"Head Gib"
+	"Hat 3"
 	{
-		"zho"			"布吉頭"
+		"zho"		"布吉頭"
 	}
-
-	"Circular Saw"
+	"Hat 4"
 	{
-		"zho"			"圓鋸"
+		"zho"		"圓鋸"
 	}
-
-	"Red Emergency Light"
+	"Hat 5"
 	{
-		"zho"			"紅色應急燈"
+		"zho"		"紅色應急燈"
 	}
-
-	"Alligator"
+	"Hat 6"
 	{
-		"zho"			"鱷魚布偶"
+		"zho"		"鱷魚布偶"
 	}
-
-	"Mr Mustachio"
+	"Hat 7"
 	{
-		"zho"			"穆斯塔基奧先生"
+		"zho"		"穆斯塔基奧先生"
 	}
-
-	"Traffic Cone"
+	"Hat 8"
 	{
-		"zho"			"交通錐"
+		"zho"		"交通錐"
 	}
-
-	"Teddy Bear"
+	"Hat 9"
 	{
-		"zho"			"泰迪熊"
+		"zho"		"泰迪熊"
 	}
-
-	"Toilet Seat"
+	"Hat 10"
 	{
-		"zho"			"馬桶座圈"
+		"zho"		"馬桶座圈"
 	}
-
-	"Water bottle"
+	"Hat 11"
 	{
-		"zho"			"礦泉水瓶"
+		"zho"		"礦泉水瓶"
 	}
-
-	"Dock Pylon"
+	"Hat 12"
 	{
-		"zho"			"碼頭塔"
+		"zho"		"碼頭塔"
 	}
-
-	"Life Ring"
+	"Hat 13"
 	{
-		"zho"			"救生圈"
+		"zho"		"救生圈"
 	}
-
-	"Construction Light"
+	"Hat 14"
 	{
-		"zho"			"施工燈"
+		"zho"		"施工燈"
 	}
-
-	"Speech Quote"
+	"Hat 15"
 	{
-		"zho"			"我無言了"
+		"zho"		"我無言了"
 	}
-
-	"Smoker Tongue"
+	"Hat 16"
 	{
-		"zho"			"Smoker的舌頭"
+		"zho"		"Smoker的舌頭"
 	}
-
-	"Ceiling Fan Blades"
+	"Hat 17"
 	{
-		"zho"			"吊扇葉片"
+		"zho"		"吊扇葉片"
 	}
-
-	"F-18 Jet Plane"
+	"Hat 18"
 	{
-		"zho"			"F-18噴氣式飛機"
+		"zho"		"F-18噴氣式飛機"
 	}
-
-	"Civilian Radio"
+	"Hat 19"
 	{
-		"zho"			"對講機"
+		"zho"		"對講機"
 	}
-
-	"Riot Faceplate"
+	"Hat 20"
 	{
-		"zho"			"防暴面板"
+		"zho"		"防暴面板"
 	}
-
-	"Styrofoam Cups"
+	"Hat 21"
 	{
-		"zho"			"發泡膠杯"
+		"zho"		"發泡膠杯"
 	}
-
-	"Bug Lamp Zapper"
+	"Hat 22"
 	{
-		"zho"			"驅蟲燈"
+		"zho"		"驅蟲燈"
 	}
-
-	"BBQ Grill"
+	"Hat 23"
 	{
-		"zho"			"燒烤爐"
+		"zho"		"燒烤爐"
 	}
-
-	"Luggage Cart"
+	"Hat 24"
 	{
-		"zho"			"購物車"
+		"zho"		"購物車"
 	}
-
-	"Lantern"
+	"Hat 25"
 	{
-		"zho"			"燈籠"
+		"zho"		"燈籠"
 	}
-
-	"Exit Sign"
+	"Hat 26"
 	{
-		"zho"			"出口指示牌"
+		"zho"		"出口指示牌"
 	}
-
-	"Garden Hose"
+	"Hat 27"
 	{
-		"zho"			"園藝軟管"
+		"zho"		"園藝軟管"
 	}
-
-	"Pink Flamingo"
+	"Hat 28"
 	{
-		"zho"			"粉紅天鵝"
+		"zho"		"粉紅天鵝"
 	}
-
-	"Money Pile"
+	"Hat 29"
 	{
-		"zho"			"錢堆"
+		"zho"		"錢堆"
 	}
-
-	"Elephant"
+	"Hat 30"
 	{
-		"zho"			"大象布偶"
+		"zho"		"大象布偶"
 	}
-
-	"Giraffe"
+	"Hat 31"
 	{
-		"zho"			"長頸鹿布偶"
+		"zho"		"長頸鹿布偶"
 	}
-
-	"Popcorn Box"
+	"Hat 32"
 	{
-		"zho"			"爆米花盒"
+		"zho"		"爆米花盒"
 	}
-
-	"Gnome Closet"
+	"Hat 33"
 	{
-		"zho"			"小矮人的櫃子尸"
+		"zho"		"小矮人的櫃子尸"
 	}
-
-	"Snake"
+	"Hat 34"
 	{
-		"zho"			"蛇布偶"
+		"zho"		"蛇布偶"
 	}
-
-	"Toaster"
+	"Hat 35"
 	{
-		"zho"			"烤麵包機"
+		"zho"		"烤麵包機"
 	}
-
-	"Doll"
+	"Hat 36"
 	{
-		"zho"			"玩具娃娃"
+		"zho"		"玩具娃娃"
 	}
-
-	"Hub Cap"
+	"Hat 37"
 	{
-		"zho"			"輪轂蓋"
+		"zho"		"輪轂蓋"
 	}
-
-	"Mannequin Hand"
+	"Hat 38"
 	{
-		"zho"			"模特手"
+		"zho"		"模特手"
 	}
-
-	"Desk Lamp"
+	"Hat 39"
 	{
-		"zho"			"檯燈"
+		"zho"		"檯燈"
 	}
-
-	"Big Helicopter"
+	"Hat 40"
 	{
-		"zho"			"大直升機"
+		"zho"		"大直升機"
 	}
-
-	"News Helicopter"
+	"Hat 41"
 	{
-		"zho"			"新聞直升機"
+		"zho"		"新聞直升機"
 	}
-
-	"Missile"
+	"Hat 42"
 	{
-		"zho"			"導彈"
+		"zho"		"導彈"
 	}
-
-	"Fishing Boat"
+	"Hat 43"
 	{
-		"zho"			"漁船"
+		"zho"		"漁船"
 	}
-
-	"Childs Trike"
+	"Hat 44"
 	{
-		"zho"			"三輪車"
+		"zho"		"三輪車"
 	}
-
-	"Deer Head"
+	"Hat 45"
 	{
-		"zho"			"鹿頭布偶"
+		"zho"		"鹿頭布偶"
 	}
-
-	"Saucepan"
+	"Hat 46"
 	{
-		"zho"			"平底煲"
+		"zho"		"平底煲"
 	}
-
-	"Frying Pan"
+	"Hat 47"
 	{
-		"zho"			"平底鍋"
+		"zho"		"平底鍋"
 	}
-
-	"Skull"
+	"Hat 48"
 	{
-		"zho"			"顱骨"
+		"zho"		"顱骨"
 	}
-
-	"Case of Beer"
+	"Hat 49"
 	{
-		"zho"			"啤酒箱"
+		"zho"		"啤酒箱"
 	}
-
-	"Office Chair"
+	"Hat 50"
 	{
-		"zho"			"辦公椅"
+		"zho"		"辦公椅"
 	}
-
-	"Graveyard Cross"
+	"Hat 51"
 	{
-		"zho"			"墓地十字架"
+		"zho"		"墓地十字架"
 	}
-
-	"Kiddyland Rocket"
+	"Hat 52"
 	{
-		"zho"			"火箭"
+		"zho"		"火箭"
 	}
-
-	"Toilet"
+	"Hat 53"
 	{
-		"zho"			"馬桶"
+		"zho"		"馬桶"
 	}
-
-	"Lamp Shade"
+	"Hat 54"
 	{
-		"zho"			"燈罩"
+		"zho"		"燈罩"
 	}
-
-	"Saddle"
+	"Hat 55"
 	{
-		"zho"			"馬鞍"
+		"zho"		"馬鞍"
 	}
-
-	"Wheel Chair"
+	"Hat 56"
 	{
-		"zho"			"輪椅"
+		"zho"		"輪椅"
 	}
-
-	"Mega Phone"
+	"Hat 57"
 	{
-		"zho"			"擴音器"
+		"zho"		"擴音器"
 	}
-
-	"Flood lights"
+	"Hat 58"
 	{
-		"zho"			"投光燈"
+		"zho"		"投光燈"
 	}
-
-	"Car Tire"
+	"Hat 59"
 	{
-		"zho"			"汽車輪胎"
+		"zho"		"汽車輪胎"
 	}
-
-	"Ceiling Fan"
+	"Hat 60"
 	{
-		"zho"			"吊扇"
+		"zho"		"吊扇"
 	}
-
-	"Fan"
+	"Hat 61"
 	{
-		"zho"			"風扇"
+		"zho"		"風扇"
 	}
-
-	"Pot Plant 1"
+	"Hat 62"
 	{
-		"zho"			"盆栽植物1"
+		"zho"		"盆栽植物1"
 	}
-
-	"Pot Plant 2"
+	"Hat 63"
 	{
-		"zho"			"盆栽植物2"
+		"zho"		"盆栽植物2"
 	}
-
-	"Ironing Board"
+	"Hat 64"
 	{
-		"zho"			"燙衣板"
+		"zho"		"燙衣板"
 	}
-
-	"Coin"
+	"Hat 65"
 	{
-		"zho"			"錢幣"
+		"zho"		"錢幣"
 	}
-
-	"Jockey"
+	"Hat 66"
 	{
-		"zho"			"迷你Jockey"
+		"zho"		"迷你Jockey"
 	}
-
-	"Gift"
+	"Hat 67"
 	{
-		"zho"			"禮物盒"
+		"zho"		"禮物盒"
 	}
-
-	"Fire Hydrant"
+	"Hat 68"
 	{
-		"zho"			"消防栓"
+		"zho"		"消防栓"
 	}
-
-	"Gnome"
+	"Hat 69"
 	{
-		"zho"			"小矮人"
+		"zho"		"小矮人"
 	}
-
-	"Sail Boat"
+	"Hat 70"
 	{
-		"zho"			"帆船"
+		"zho"		"帆船"
 	}
-
-	"Red Bulkhead Light"
+	"Hat 71"
 	{
-		"zho"			"紅色隔板燈"
+		"zho"		"紅色隔板燈"
 	}
-
-	"Wheel Hubcap"
+	"Hat 72"
 	{
-		"zho"			"輪轂罩"
+		"zho"		"輪轂罩"
 	}
-
-	"Graveyard Cross"
+	"Hat 73"
 	{
-		"zho"			"墓地十字架"
+		"zho"		"墓地十字架"
 	}
-
-	"Tea Pot"
+	"Hat 74"
 	{
-		"zho"			"茶壺"
+		"zho"		"茶壺"
 	}
-
-	"Pyrotechnics"
+	"Hat 75"
 	{
-		"zho"			"煙火"
+		"zho"		"煙火"
 	}
-
-	"Coffee Maker"
+	"Hat 76"
 	{
-		"zho"			"咖啡機"
+		"zho"		"咖啡機"
 	}
-
-	"Kettle"
+	"Hat 77"
 	{
-		"zho"			"水壺"
+		"zho"		"水壺"
 	}
-
-	"TV"
+	"Hat 78"
 	{
-		"zho"			"電視機"
+		"zho"		"電視機"
 	}
-
-	"Lamp Shade 1"
+	"Hat 79"
 	{
-		"zho"			"燈罩1"
+		"zho"		"燈罩1"
 	}
-
-	"Lamp Shade 2"
+	"Hat 80"
 	{
-		"zho"			"燈罩2"
+		"zho"		"燈罩2"
 	}
-
-	"Lamp Shade 3"
+	"Hat 81"
 	{
-		"zho"			"燈罩3"
+		"zho"		"燈罩3"
 	}
-
-	"Dog Food"
+	"Hat 82"
 	{
-		"zho"			"狗糧"
+		"zho"		"狗糧"
 	}
-
-	"Dalek Flash Light"
+	"Hat 83"
 	{
-		"zho"			"手電筒"
+		"zho"		"手電筒"
 	}
-
-	"Ball Light"
+	"Hat 84"
 	{
-		"zho"			"球燈"
+		"zho"		"球燈"
 	}
-
-	"Cash Register"
+	"Hat 85"
 	{
-		"zho"			"收銀機"
+		"zho"		"收銀機"
 	}
-
-	"Gun Trophy 1"
+	"Hat 86"
 	{
-		"zho"			"槍戰利品1"
+		"zho"		"槍戰利品1"
 	}
-
-	"Gun Trophy 2"
+	"Hat 87"
 	{
-		"zho"			"槍戰利品2"
+		"zho"		"槍戰利品2"
 	}
-
-	"Spitter Arms"
+	"Hat 88"
 	{
-		"zho"			"飛濺武器"
+		"zho"		"飛濺武器"
 	}
-
-	"Jockey Claws"
+	"Hat 89"
 	{
-		"zho"			"Jockey的爪"
+		"zho"		"Jockey的爪"
 	}
-
-	"Tank Claws"
+	"Hat 90"
 	{
-		"zho"			"Tank的爪"
+		"zho"		"Tank的爪"
 	}
-
-	"Grenade Shell"
+	"Hat 91"
 	{
-		"zho"			"手榴彈殼"
+		"zho"		"手榴彈殼"
 	}
-
-	"Propane Cylinder"
+	"Hat 92"
 	{
-		"zho"			"丙烷氣瓶"
+		"zho"		"丙烷氣瓶"
 	}
-
-	"Medkit Cap"
+	"Hat 93"
 	{
-		"zho"			"藥盒蓋"
+		"zho"		"藥盒蓋"
 	}
-
-	"Riot Shield"
+	"Hat 94"
 	{
-		"zho"			"防暴盾牌"
+		"zho"		"防暴盾牌"
 	}
-
-	"Tug Boat"
+	"Hat 95"
 	{
-		"zho"			"拖船"
+		"zho"		"拖船"
 	}
 }
