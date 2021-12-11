@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.39"
+#define PLUGIN_VERSION 		"1.40"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,10 @@
 
 ========================================================================================
 	Change Log:
+
+1.40 (11-Dec-2021)
+	- Fixed not saving hat angles and origins correctly when "l4d_hats_wall" was set to "0". Thanks to "NoroHime" for reporting.
+	- Now saves when a hat was removed, if saving is enabled. Requested by "kot4404".
 
 1.39 (09-Dec-2021)
 	- Changed command "sm_hat" to accept "rand" or "random" as a parameter option to give a random hat.
@@ -909,9 +913,9 @@ public Action TimerRand(Handle timer)
 {
 	for( int i = 1; i <= MaxClients; i++ )
 	{
-		if( IsValidClient(i) )
+		if( IsValidClient(i) && g_iType[i] != -1 )
 		{
-			CreateHat(i, g_iType[i] ? g_iType[i] - 1: -1);
+			CreateHat(i, g_iType[i] ? g_iType[i] - 1 : -1);
 		}
 	}
 
@@ -1205,6 +1209,11 @@ public Action CmdHat(int client, int args)
 
 				if( index == 0 )
 				{
+					if( g_iCvarSave && !IsFakeClient(client) )
+					{
+						SetClientCookie(client, g_hCookie, "-1");
+					}
+
 					CPrintToChat(client, "%s%T", CHAT_TAG, "Off", client);
 				}
 				else if( CreateHat(client, index - 1) )
@@ -1294,6 +1303,11 @@ public int HatMenuHandler(Menu menu, MenuAction action, int client, int index)
 
 			if( index == 0 )
 			{
+				if( g_iCvarSave && !IsFakeClient(client) )
+				{
+					SetClientCookie(client, g_hCookie, "-1");
+				}
+
 				CPrintToChat(client, "%s%T", CHAT_TAG, "Off", client);
 			}
 			else if( CreateHat(client, index - 1) )
@@ -1798,7 +1812,7 @@ public Action CmdHatSave(int client, int args)
 {
 	if( g_bCvarAllow && IsValidClient(client) )
 	{
-		int entity = g_iHatIndex[client];
+		int entity = g_bCvarWall ? g_iHatWalls[client] : g_iHatIndex[client];
 		if( IsValidEntRef(entity) )
 		{
 			KeyValues hFile = OpenConfig();
@@ -1820,16 +1834,20 @@ public Action CmdHatSave(int client, int args)
 
 				if( g_bLeft4Dead2 )
 				{
-					fSize = GetEntPropFloat(entity, Prop_Send, "m_flModelScale");
-					if( fSize == 1.0 )
+					entity = g_iHatIndex[client];
+					if( IsValidEntRef(entity) )
 					{
-						if( hFile.GetFloat("size", 999.9) != 999.9 )
-							hFile.DeleteKey("size");
-					}
-					else
-						hFile.SetFloat("size", fSize);
+						fSize = GetEntPropFloat(entity, Prop_Send, "m_flModelScale");
+						if( fSize == 1.0 )
+						{
+							if( hFile.GetFloat("size", 999.9) != 999.9 )
+								hFile.DeleteKey("size");
+						}
+						else
+							hFile.SetFloat("size", fSize);
 
-					g_fSize[index] = fSize;
+						g_fSize[index] = fSize;
+					}
 				}
 
 				SaveConfig(hFile);
@@ -1900,7 +1918,7 @@ public int AngMenuHandler(Menu menu, MenuAction action, int client, int index)
 			{
 				if( IsValidClient(i) )
 				{
-					entity = g_iHatIndex[i];
+					entity = g_bCvarWall ? g_iHatWalls[i] : g_iHatIndex[i];
 					if( IsValidEntRef(entity) )
 					{
 						GetEntPropVector(entity, Prop_Send, "m_angRotation", vAng);
@@ -1982,7 +2000,7 @@ public int PosMenuHandler(Menu menu, MenuAction action, int client, int index)
 			{
 				if( IsValidClient(i) )
 				{
-					entity = g_iHatIndex[i];
+					entity = g_bCvarWall ? g_iHatWalls[i] : g_iHatIndex[i];
 					if( IsValidEntRef(entity) )
 					{
 						GetEntPropVector(entity, Prop_Send, "m_vecOrigin", vPos);
@@ -2144,6 +2162,9 @@ bool CreateHat(int client, int index = -1)
 		if( g_iCvarRand != 2 ) return false;
 
 		index = g_iType[client];
+		if( index == -1 )
+			return false;
+
 		if( index == 0 )
 		{
 			index = GetRandomInt(1, g_iCount);
@@ -2154,6 +2175,8 @@ bool CreateHat(int client, int index = -1)
 	else if( index == -3 ) // Saved hats
 	{
 		index = g_iType[client];
+		if( index == -1 )
+			return false;
 
 		if( index == 0 )
 		{
@@ -2166,6 +2189,7 @@ bool CreateHat(int client, int index = -1)
 				index = GetRandomInt(1, g_iCount);
 			}
 		}
+
 		index--;
 	}
 	else // Specified hat
