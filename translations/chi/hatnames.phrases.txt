@@ -1,382 +1,382 @@
 "Phrases"
 {
-	"Hat 1"
+	"models/infected/gibs/gibs.mdl"
 	{
 		"chi"		"一手遮天"
 	}
-	"Hat 2"
+	"models/infected/limbs/exploded_boomer_head.mdl"
 	{
 		"chi"		"Boomer 头"
 	}
-	"Hat 3"
+	"models/infected/limbs/limb_male_head01.mdl"
 	{
 		"chi"		"假面"
 	}
-	"Hat 4"
+	"models/props/cs_militia/circularsaw01.mdl"
 	{
 		"chi"		"圆锯"
 	}
-	"Hat 5"
+	"models/props/de_nuke/emergency_lighta.mdl"
 	{
 		"chi"		"红色应急灯"
 	}
-	"Hat 6"
+	"models/props_fairgrounds/alligator.mdl"
 	{
 		"chi"		"鳄鱼"
 	}
-	"Hat 7"
+	"models/props_fairgrounds/mr_mustachio.mdl"
 	{
 		"chi"		"胡子先生"
 	}
-	"Hat 8"
+	"models/props_fortifications/orange_cone001_clientside.mdl"
 	{
 		"chi"		"路障"
 	}
-	"Hat 9"
+	"models/props_interiors/teddy_bear.mdl"
 	{
 		"chi"		"玩具熊"
 	}
-	"Hat 10"
+	"models/props_interiors/toilet_b_breakable01_part13.mdl"
 	{
 		"chi"		"便器"
 	}
-	"Hat 11"
+	"models/props_interiors/waterbottle.mdl"
 	{
 		"chi"		"水瓶"
 	}
-	"Hat 12"
+	"models/props_urban/dock_pylon_cap001.mdl"
 	{
 		"chi"		"码头塔"
 	}
-	"Hat 13"
+	"models/props_urban/life_ring001.mdl"
 	{
 		"chi"		"救生圈"
 	}
-	"Hat 14"
+	"models/props_lighting/light_construction02.mdl"
 	{
 		"chi"		"建筑灯"
 	}
-	"Hat 15"
+	"models/extras/info_speech.mdl"
 	{
 		"chi"		"聊天气泡"
 	}
-	"Hat 16"
+	"models/infected/smoker_tongue_attach.mdl"
 	{
 		"chi"		"舌头"
 	}
-	"Hat 17"
+	"models/props/de_inferno/ceiling_fan_blade.mdl"
 	{
 		"chi"		"吊扇叶片"
 	}
-	"Hat 18"
+	"models/f18/f18_placeholder.mdl"
 	{
 		"chi"		"F-18 喷气式飞机"
 	}
-	"Hat 19"
+	"models/deadbodies/dead_male_civilian_radio.mdl"
 	{
 		"chi"		"对讲机"
 	}
-	"Hat 20"
+	"models/infected/cim_riot_faceplate.mdl"
 	{
 		"chi"		"防爆罩"
 	}
-	"Hat 21"
+	"models/props_interiors/styrofoam_cups.mdl"
 	{
 		"chi"		"泡沫塑料杯"
 	}
-	"Hat 22"
+	"models/props_shacks/bug_lamp01.mdl"
 	{
 		"chi"		"灭蚊灯"
 	}
-	"Hat 23"
+	"models/props_unique/grill_campground.mdl"
 	{
 		"chi"		"烧烤架"
 	}
-	"Hat 24"
+	"models/props_unique/luggagecart01.mdl"
 	{
 		"chi"		"超市手推车"
 	}
-	"Hat 25"
+	"models/props_unique/spawn_apartment/lantern.mdl"
 	{
 		"chi"		"手提灯"
 	}
-	"Hat 26"
+	"models/props_urban/exit_sign002.mdl"
 	{
 		"chi"		"出口标记"
 	}
-	"Hat 27"
+	"models/props_urban/garden_hose001.mdl"
 	{
 		"chi"		"软管"
 	}
-	"Hat 28"
+	"models/props_urban/plastic_flamingo001.mdl"
 	{
 		"chi"		"粉红火烈鸟"
 	}
-	"Hat 29"
+	"models/props_waterfront/money_pile.mdl"
 	{
 		"chi"		"钱堆"
 	}
-	"Hat 30"
+	"models/props_fairgrounds/elephant.mdl"
 	{
 		"chi"		"大象"
 	}
-	"Hat 31"
+	"models/props_fairgrounds/giraffe.mdl"
 	{
 		"chi"		"长颈鹿"
 	}
-	"Hat 32"
+	"models/props_fairgrounds/garbage_popcorn_box.mdl"
 	{
 		"chi"		"爆米花"
 	}
-	"Hat 33"
+	"models/props_fairgrounds/gnome_closet.mdl"
 	{
 		"chi"		"矮人架"
 	}
-	"Hat 34"
+	"models/props_fairgrounds/snake.mdl"
 	{
 		"chi"		"蛇"
 	}
-	"Hat 35"
+	"models/props_interiors/toaster.mdl"
 	{
 		"chi"		"面包机"
 	}
-	"Hat 36"
+	"models/props_unique/doll01.mdl"
 	{
 		"chi"		"娃娃"
 	}
-	"Hat 37"
+	"models/props_junk/garbage_hubcap01a.mdl"
 	{
 		"chi"		"轮胎盖"
 	}
-	"Hat 38"
+	"models/props_mall/mall_mannequin_rhand.mdl"
 	{
 		"chi"		"模型手"
 	}
-	"Hat 39"
+	"models/props_lab/desklamp01.mdl"
 	{
 		"chi"		"台灯"
 	}
-	"Hat 40"
+	"models/props_vehicles/helicopter_rescue.mdl"
 	{
 		"chi"		"大直升机"
 	}
-	"Hat 41"
+	"models/hybridphysx/news_helicoptor_map1_intro_v1.mdl"
 	{
 		"chi"		"新闻直升机"
 	}
-	"Hat 42"
+	"models/missiles/f18_agm65maverick.mdl"
 	{
 		"chi"		"导弹"
 	}
-	"Hat 43"
+	"models/props_vehicles/boat_fishing02.mdl"
 	{
 		"chi"		"渔船"
 	}
-	"Hat 44"
+	"models/props_urban/big_wheel001.mdl"
 	{
 		"chi"		"儿童三轮车"
 	}
-	"Hat 45"
+	"models/props_interiors/mounteddeerhead01.mdl"
 	{
 		"chi"		"鹿头"
 	}
-	"Hat 46"
+	"models/props_misc/pot-1.mdl"
 	{
 		"chi"		"平底锅"
 	}
-	"Hat 47"
+	"models/props_c17/metalpot002a.mdl"
 	{
 		"chi"		"煎锅"
 	}
-	"Hat 48"
+	"models/gibs/hgibs.mdl"
 	{
 		"chi"		"骷髅头"
 	}
-	"Hat 49"
+	"models/props/cs_militia/caseofbeer01.mdl"
 	{
 		"chi"		"啤酒箱"
 	}
-	"Hat 50"
+	"models/props/cs_office/chair_office.mdl"
 	{
 		"chi"		"办公椅子"
 	}
-	"Hat 51"
+	"models/props_cemetery/crypts_top02.mdl"
 	{
 		"chi"		"墓地十字架"
 	}
-	"Hat 52"
+	"models/props_fairgrounds/kiddyland_riderocket_small.mdl"
 	{
 		"chi"		"儿童乐园火箭"
 	}
-	"Hat 53"
+	"models/props_interiors/toilet_b_breakable01.mdl"
 	{
 		"chi"		"厕所"
 	}
-	"Hat 54"
+	"models/props_misc/lamp-1_gib1.mdl"
 	{
 		"chi"		"灯罩"
 	}
-	"Hat 55"
+	"models/props_misc/saddle-1.mdl"
 	{
 		"chi"		"马鞍"
 	}
-	"Hat 56"
+	"models/props_unique/wheelchair01.mdl"
 	{
 		"chi"		"轮椅"
 	}
-	"Hat 57"
+	"models/props_urban/mega_phone001.mdl"
 	{
 		"chi"		"大喇叭"
 	}
-	"Hat 58"
+	"models/props/de_train/de_train_floodlights_01.mdl"
 	{
 		"chi"		"泛光灯"
 	}
-	"Hat 59"
+	"models/props_vehicles/tire001c_car.mdl"
 	{
 		"chi"		"汽车轮胎"
 	}
-	"Hat 60"
+	"models/props/de_inferno/ceiling_fan.mdl"
 	{
 		"chi"		"吊扇"
 	}
-	"Hat 61"
+	"models/props/de_prodigy/fan.mdl"
 	{
 		"chi"		"涡轮扇"
 	}
-	"Hat 62"
+	"models/props_foliage/urban_pot_clay01.mdl"
 	{
 		"chi"		"盆栽植物 1"
 	}
-	"Hat 63"
+	"models/props_foliage/urban_pot_clay02.mdl"
 	{
 		"chi"		"盆栽植物 2"
 	}
-	"Hat 64"
+	"models/props_downtown/ironing_board_flat.mdl"
 	{
 		"chi"		"熨衣板"
 	}
-	"Hat 65"
+	"models/props_collectables/coin.mdl"
 	{
 		"chi"		"金币"
 	}
-	"Hat 66"
+	"models/infected/jockey.mdl"
 	{
 		"chi"		"Jockey"
 	}
-	"Hat 67"
+	"models/items/l4d_gift.mdl"
 	{
 		"chi"		"礼物"
 	}
-	"Hat 68"
+	"models/props_street/firehydrant.mdl"
 	{
 		"chi"		"消防栓"
 	}
-	"Hat 69"
+	"models/props_junk/gnome.mdl"
 	{
 		"chi"		"矮人"
 	}
-	"Hat 70"
+	"models/bunny/b_sailboat.mdl"
 	{
 		"chi"		"帆船"
 	}
-	"Hat 71"
+	"models/props/de_nuke/light_red2.mdl"
 	{
 		"chi"		"红色舱壁灯"
 	}
-	"Hat 72"
+	"models/props_buildables/mine.mdl"
 	{
 		"chi"		"轮毂盖"
 	}
-	"Hat 73"
+	"models/props_cemetery/crypts_top01.mdl"
 	{
 		"chi"		"墓地十字架"
 	}
-	"Hat 74"
+	"models/props_misc/tea_pot-1.mdl"
 	{
 		"chi"		"泡泡茶壶"
 	}
-	"Hat 75"
+	"models/props_fairgrounds/pyrotechnics_launcher.mdl"
 	{
 		"chi"		"烟火"
 	}
-	"Hat 76"
+	"models/props_interiors/coffee_maker.mdl"
 	{
 		"chi"		"咖啡机"
 	}
-	"Hat 77"
+	"models/props_interiors/pot01a.mdl"
 	{
 		"chi"		"水壶"
 	}
-	"Hat 78"
+	"models/props_interiors/tv.mdl"
 	{
 		"chi"		"电视"
 	}
-	"Hat 79"
+	"models/props_interiors/lamp_floor_gib2.mdl"
 	{
 		"chi"		"灯罩 1"
 	}
-	"Hat 80"
+	"models/props_interiors/lamp_table02_gib2.mdl"
 	{
 		"chi"		"灯罩 2"
 	}
-	"Hat 81"
+	"models/props_lighting/semi_flush_001.mdl"
 	{
 		"chi"		"灯罩 3"
 	}
-	"Hat 82"
+	"models/props_junk/petfoodbag01.mdl"
 	{
 		"chi"		"狗粮"
 	}
-	"Hat 83"
+	"models/props_lighting/flashlight_dropped_01.mdl"
 	{
 		"chi"		"手电筒"
 	}
-	"Hat 84"
+	"models/props_lighting/lightfixture03.mdl"
 	{
 		"chi"		"球灯"
 	}
-	"Hat 85"
+	"models/props_mall/cash_register.mdl"
 	{
 		"chi"		"收银机"
 	}
-	"Hat 86"
+	"models/props_placeable/tier1_guns_trophy.mdl"
 	{
 		"chi"		"枪架 1"
 	}
-	"Hat 87"
+	"models/props_placeable/tier2_guns_trophy.mdl"
 	{
 		"chi"		"枪架 2"
 	}
-	"Hat 88"
+	"models/weapons/arms/v_spitter_arms.mdl"
 	{
 		"chi"		"Spitter 手"
 	}
-	"Hat 89"
+	"models/weapons/arms/v_jockey_arms.mdl"
 	{
 		"chi"		"Jockey 爪子"
 	}
-	"Hat 90"
+	"models/v_models/weapons/v_claw_hulk.mdl"
 	{
 		"chi"		"Tank 爪子"
 	}
-	"Hat 91"
+	"models/w_models/weapons/w_he_grenade.mdl"
 	{
 		"chi"		"炮弹"
 	}
-	"Hat 92"
+	"models/props_junk/propanecanister001a.mdl"
 	{
 		"chi"		"丙烷气瓶"
 	}
-	"Hat 93"
+	"models/w_models/weapons/w_eq_medkit.mdl"
 	{
 		"chi"		"医疗包帽"
 	}
-	"Hat 94"
+	"models/weapons/melee/w_riotshield.mdl"
 	{
 		"chi"		"防爆盾"
 	}
-	"Hat 95"
+	"models/props_skybox/boat_rescue_tug_sunshine.mdl"
 	{
 		"chi"		"游艇"
 	}

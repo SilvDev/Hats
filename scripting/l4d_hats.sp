@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.40"
+#define PLUGIN_VERSION 		"1.41"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,15 @@
 
 ========================================================================================
 	Change Log:
+
+1.41 (14-Dec-2021)
+	- Fixed spawning and respawning with a hat when it was turned off. Thanks to "kot4404" for reporting.
+
+	- Changed the "hatnames.phrases.txt" translation file format for better modifications when adding or removing hats from the data config.
+	- Now supports adding hats and breaking the plugin when missing from the "hatnames.phrases.txt" translations file.
+	- New "hatnames" translations no longer uses indexes and only model names.
+	- Still supports the old version but suggest upgrading to the new.
+	- Included the script for converting the translation file based on the config. Search for "TRANSLATE CODE" in the source.
 
 1.40 (11-Dec-2021)
 	- Fixed not saving hat angles and origins correctly when "l4d_hats_wall" was set to "0". Thanks to "NoroHime" for reporting.
@@ -1212,6 +1221,7 @@ public Action CmdHat(int client, int args)
 					if( g_iCvarSave && !IsFakeClient(client) )
 					{
 						SetClientCookie(client, g_hCookie, "-1");
+						g_iType[client] = -1;
 					}
 
 					CPrintToChat(client, "%s%T", CHAT_TAG, "Off", client);
@@ -1306,6 +1316,7 @@ public int HatMenuHandler(Menu menu, MenuAction action, int client, int index)
 				if( g_iCvarSave && !IsFakeClient(client) )
 				{
 					SetClientCookie(client, g_hCookie, "-1");
+					g_iType[client] = -1;
 				}
 
 				CPrintToChat(client, "%s%T", CHAT_TAG, "Off", client);
@@ -1331,17 +1342,36 @@ void ShowMenu(int client)
 	}
 	else
 	{
-		char sTemp[128];
+		static char sMsg[128];
 		Menu hTemp = new Menu(HatMenuHandler);
 		hTemp.SetTitle("%T", "Hat_Menu_Title", client);
-		Format(sTemp, sizeof(sTemp), "%T", "Off", client);
-		hTemp.AddItem("Off", sTemp);
+		FormatEx(sMsg, sizeof(sMsg), "%T", "Off", client);
+		hTemp.AddItem("Off", sMsg);
 
 		for( int i = 0; i < g_iCount; i++ )
 		{
-			Format(sTemp, sizeof(sTemp), "Hat %d", i + 1, client);
-			Format(sTemp, sizeof(sTemp), "%T", sTemp, client);
-			hTemp.AddItem(g_sModels[i], sTemp);
+			FormatEx(sMsg, sizeof(sMsg), "%s", g_sModels[i]);
+			int lang = GetClientLanguage(client);
+
+			if( IsTranslatedForLanguage(sMsg, lang) == true )
+			{
+				Format(sMsg, sizeof(sMsg), "%T", sMsg, client);
+				hTemp.AddItem(g_sModels[i], sMsg);
+			} else {
+				FormatEx(sMsg, sizeof(sMsg), "Hat %d", i + 1);
+				if( IsTranslatedForLanguage(sMsg, lang) == true )
+				{
+					Format(sMsg, sizeof(sMsg), "%T", sMsg, client);
+					hTemp.AddItem(g_sModels[i], sMsg);
+				} else {
+					CPrintToChat(client, "%s%T", CHAT_TAG, "Hat_Wearing", client, g_sNames[i]);
+					hTemp.AddItem(g_sModels[i], sMsg);
+				}
+			}
+
+			// FormatEx(sTemp, sizeof(sTemp), "%s", g_sModels[i]);
+			// Format(sTemp, sizeof(sTemp), "%T", sTemp, client);
+			// hTemp.AddItem(g_sModels[i], sTemp);
 		}
 
 		hTemp.ExitButton = true;
@@ -1368,7 +1398,7 @@ public Action CmdHatOff(int client, int args)
 		RemoveHat(client);
 
 	char sTemp[64];
-	Format(sTemp, sizeof(sTemp), "%T", g_bHatOff[client] ? "Hat_Off" : "Hat_On", client);
+	FormatEx(sTemp, sizeof(sTemp), "%T", g_bHatOff[client] ? "Hat_Off" : "Hat_On", client);
 	CPrintToChat(client, "%s%T", CHAT_TAG, "Hat_Ability", client, sTemp);
 
 	return Plugin_Handled;
@@ -1413,7 +1443,7 @@ public Action CmdHatShow(int client, int args)
 		SDKUnhook(entity, SDKHook_SetTransmit, Hook_SetTransmit);
 
 	char sTemp[64];
-	Format(sTemp, sizeof(sTemp), "%T", g_bHatView[client] ? "Hat_On" : "Hat_Off", client);
+	FormatEx(sTemp, sizeof(sTemp), "%T", g_bHatView[client] ? "Hat_On" : "Hat_Off", client);
 	CPrintToChat(client, "%s%T", CHAT_TAG, "Hat_View", client, sTemp);
 	return Plugin_Handled;
 }
@@ -1758,19 +1788,38 @@ public Action CmdHatDel(int client, int args)
 	{
 		int index = g_iSelected[client];
 
-		if( g_bTranslation == false )
-		{
-			CPrintToChat(client, "%s%T", CHAT_TAG, "Hat_Wearing", client, g_sNames[index]);
-		}
-		else
-		{
-			char sMsg[128];
-			Format(sMsg, sizeof(sMsg), "Hat %d", index + 1);
-			Format(sMsg, sizeof(sMsg), "%T", sMsg, client);
-			CPrintToChat(client, "%s%T", CHAT_TAG, "Hat_Wearing", client, sMsg);
-		}
+		TranslateHatName(client, index);
 	}
 	return Plugin_Handled;
+}
+
+void TranslateHatName(int client, int index)
+{
+	if( g_bTranslation == false )
+	{
+		CPrintToChat(client, "%s%T", CHAT_TAG, "Hat_Wearing", client, g_sNames[index]);
+	}
+	else
+	{
+		static char sMsg[128];
+		FormatEx(sMsg, sizeof(sMsg), "%s", g_sModels[index]);
+		int lang = GetClientLanguage(client);
+
+		if( IsTranslatedForLanguage(sMsg, lang) == true )
+		{
+			Format(sMsg, sizeof(sMsg), "%T", sMsg, client);
+			CPrintToChat(client, "%s%T", CHAT_TAG, "Hat_Wearing", client, sMsg);
+		} else {
+			FormatEx(sMsg, sizeof(sMsg), "Hat %d", index + 1);
+			if( IsTranslatedForLanguage(sMsg, lang) == true )
+			{
+				Format(sMsg, sizeof(sMsg), "%T", sMsg, client);
+				CPrintToChat(client, "%s%T", CHAT_TAG, "Hat_Wearing", client, sMsg);
+			} else {
+				CPrintToChat(client, "%s%T", CHAT_TAG, "Hat_Wearing", client, g_sNames[index]);
+			}
+		}
+	}
 }
 
 // ====================================================================================================
@@ -2143,6 +2192,7 @@ bool CreateHat(int client, int index = -1)
 	if( index == -1 ) // Random hat
 	{
 		if( g_iCvarRand == 0 ) return false;
+		if( g_iType[client] == -1 ) return false;
 
 		if( g_iCvarFlags != 0 )
 		{
@@ -2162,8 +2212,7 @@ bool CreateHat(int client, int index = -1)
 		if( g_iCvarRand != 2 ) return false;
 
 		index = g_iType[client];
-		if( index == -1 )
-			return false;
+		if( index == -1 ) return false;
 
 		if( index == 0 )
 		{
@@ -2175,8 +2224,7 @@ bool CreateHat(int client, int index = -1)
 	else if( index == -3 ) // Saved hats
 	{
 		index = g_iType[client];
-		if( index == -1 )
-			return false;
+		if( index == -1 ) return false;
 
 		if( index == 0 )
 		{
@@ -2268,17 +2316,7 @@ bool CreateHat(int client, int index = -1)
 		if( !g_bHatView[client] )
 			SDKHook(entity, SDKHook_SetTransmit, Hook_SetTransmit);
 
-		if( g_bTranslation == false )
-		{
-			CPrintToChat(client, "%s%T", CHAT_TAG, "Hat_Wearing", client, g_sNames[index]);
-		}
-		else
-		{
-			char sMsg[128];
-			Format(sMsg, sizeof(sMsg), "Hat %d", index + 1);
-			Format(sMsg, sizeof(sMsg), "%T", sMsg, client);
-			CPrintToChat(client, "%s%T", CHAT_TAG, "Hat_Wearing", client, sMsg);
-		}
+		TranslateHatName(client, index);
 
 		SpectatorHatHooks();
 		return true;
@@ -2351,4 +2389,62 @@ void CPrintToChat(int client, char[] message, any ...)
 	ReplaceString(buffer, sizeof(buffer), "{olive}",		"\x05");
 
 	PrintToChat(client, buffer);
+}
+
+
+
+// ====================================================================================================
+//					TRANSLATE CODE
+// ====================================================================================================
+// If using this code, you must replace the "\" character with "/" in the new "*phrases.txt.new" file.
+stock void TranslateHatnames()
+{
+	int maxIndex = 95; // Searches from "1" to maxIndex (including max) in the "hatnames" file. Matches to the data config.
+
+	char sLang[4] = "zho/"; // Language folder to translate. Blank for "en"
+	char sText[256];
+	char sModel[PLATFORM_MAX_PATH];
+	char sTran[PLATFORM_MAX_PATH];
+	char sData[PLATFORM_MAX_PATH];
+	char sSave[PLATFORM_MAX_PATH];
+
+	BuildPath(Path_SM, sSave, sizeof sSave, "translations/%shatnames.phrases.txt.new", sLang);
+	BuildPath(Path_SM, sTran, sizeof sTran, "translations/%shatnames.phrases.txt", sLang);
+	BuildPath(Path_SM, sData, sizeof sData, "data/l4d_hats.cfg");
+
+	KeyValues hTran = new KeyValues("Phrases");
+	KeyValues hData = new KeyValues("Models");
+	KeyValues hSave = new KeyValues("Phrases");
+
+	hTran.ImportFromFile(sTran);
+	hData.ImportFromFile(sData);
+
+	char sIndex[16];
+
+	for( int i = 1; i <= maxIndex; i++ )
+	{
+		IntToString(i, sIndex, sizeof sIndex);
+		hData.JumpToKey(sIndex);
+		hData.GetString("mod", sModel, sizeof(sModel));
+		ReplaceString(sModel, sizeof sModel, "/", "\\");
+
+		Format(sIndex, sizeof sIndex, "Hat %d", i);
+		hTran.JumpToKey(sIndex);
+		hTran.GetString(sLang, sText, sizeof(sText));
+
+		PrintToServer("%02d (%s) [%s] == [%s]", i, sIndex, sModel, sText);
+
+		hSave.JumpToKey(sModel, true);
+		hSave.SetString(sLang, sText);
+
+		hTran.Rewind();
+		hData.Rewind();
+		hSave.Rewind();
+	}
+
+	hSave.ExportToFile(sSave);
+
+	delete hTran;
+	delete hData;
+	delete hSave;
 }
