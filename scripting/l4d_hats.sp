@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.41"
+#define PLUGIN_VERSION 		"1.42"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,9 @@
 
 ========================================================================================
 	Change Log:
+
+1.42 (16-Dec-2021)
+	- Fixed simple mistake from last update causing wrong menu listing when not using a "hatnames" translation. Thanks to "Mi.Cura" for reporting.
 
 1.41 (14-Dec-2021)
 	- Fixed spawning and respawning with a hat when it was turned off. Thanks to "kot4404" for reporting.
@@ -1364,14 +1367,9 @@ void ShowMenu(int client)
 					Format(sMsg, sizeof(sMsg), "%T", sMsg, client);
 					hTemp.AddItem(g_sModels[i], sMsg);
 				} else {
-					CPrintToChat(client, "%s%T", CHAT_TAG, "Hat_Wearing", client, g_sNames[i]);
-					hTemp.AddItem(g_sModels[i], sMsg);
+					hTemp.AddItem(g_sModels[i], g_sNames[i]);
 				}
 			}
-
-			// FormatEx(sTemp, sizeof(sTemp), "%s", g_sModels[i]);
-			// Format(sTemp, sizeof(sTemp), "%T", sTemp, client);
-			// hTemp.AddItem(g_sModels[i], sTemp);
 		}
 
 		hTemp.ExitButton = true;
