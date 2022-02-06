@@ -1,6 +1,6 @@
 /*
 *	Hats
-*	Copyright (C) 2021 Silvers
+*	Copyright (C) 2022 Silvers
 *
 *	This program is free software: you can redistribute it and/or modify
 *	it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.42"
+#define PLUGIN_VERSION 		"1.43"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,10 @@
 
 ========================================================================================
 	Change Log:
+
+1.43 (06-Feb-2022)
+	- Added a hackish fix for L4D2 not precaching models properly which has been causing stutter when using a model for the first time.
+	- Fixed menus closing when selecting a player with a userid greater than 999. Thanks to "Electr000999" for reporting.
 
 1.42 (16-Dec-2021)
 	- Fixed simple mistake from last update causing wrong menu listing when not using a "hatnames" translation. Thanks to "Mi.Cura" for reporting.
@@ -687,8 +691,30 @@ public void OnMapStart()
 	}
 
 	if( g_bValidMap )
+	{
 		for( int i = 0; i < g_iCount; i++ )
+		{
 			PrecacheModel(g_sModels[i]);
+		}
+
+		// Hackish precache since L4D2 does not cache models properly (client side?) any more since recent updates
+		if( g_bLeft4Dead2 )
+		{
+			RequestFrame(OnFramePrecache);
+		}
+	}
+}
+
+public void OnFramePrecache()
+{
+	int entity;
+	for( int i = 0; i < g_iCount; i++ )
+	{
+		entity = CreateEntityByName("prop_dynamic");
+		SetEntityModel(entity, g_sModels[i]);
+		DispatchSpawn(entity);
+		RemoveEdict(entity);
+	}
 }
 
 public void OnMapEnd()
@@ -1570,7 +1596,7 @@ void ShowPlayerList(int client)
 {
 	if( client && IsClientInGame(client) )
 	{
-		char sTempA[4], sTempB[MAX_NAME_LENGTH];
+		char sTempA[8], sTempB[MAX_NAME_LENGTH];
 		Menu menu = new Menu(PlayerListMenu);
 
 		for( int i = 1; i <= MaxClients; i++ )
