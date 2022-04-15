@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.43"
+#define PLUGIN_VERSION 		"1.44"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,12 @@
 
 ========================================================================================
 	Change Log:
+
+1.44 (15-Apr-2022)
+	- Changed command "sm_hat" to accept 3 letter or smaller words for partial matching, e.g. "sm_hat saw".
+	- Fixed command "sm_hatdel" not deleting the whole entry.
+	- Fixed command "sm_hat" changing other players hats after using "sm_hatc" command. Thanks to "kot4404" for reporting.
+	- Removed the "Big Helicopter" model from the data config. Too many reports of client-side glowing sprites remaining behind.
 
 1.43 (06-Feb-2022)
 	- Added a hackish fix for L4D2 not precaching models properly which has been causing stutter when using a model for the first time.
@@ -1229,12 +1235,15 @@ public Action CmdHat(int client, int args)
 		}
 	}
 
+	g_iTarget[client] = 0;
+
 	if( args == 1 )
 	{
 		char sTemp[64];
 		GetCmdArg(1, sTemp, sizeof(sTemp));
 
-		if( strlen(sTemp) < 4 )
+		int len = strlen(sTemp);
+		if( len < 4 && IsCharNumeric(sTemp[0]) && (len == 1 || IsCharNumeric(sTemp[1])) && (len == 2 || IsCharNumeric(sTemp[2])) )
 		{
 			int index = StringToInt(sTemp);
 			if( index < 0 || index >= (g_iCount + 1) )
@@ -1578,7 +1587,10 @@ public Action CmdHatClient(int client, int args)
 public Action CmdHatTarget(int client, int args)
 {
 	if( g_bCvarAllow )
+	{
+		g_bMenuType[client] = false;
 		ShowPlayerList(client);
+	}
 	return Plugin_Handled;
 }
 
@@ -1733,7 +1745,8 @@ public Action CmdHatDel(int client, int args)
 		bool bDeleted;
 
 		GetCmdArg(1, sTemp, sizeof(sTemp));
-		if( strlen(sTemp) < 4 )
+		int len = strlen(sTemp);
+		if( len < 4 && IsCharNumeric(sTemp[0]) && (len == 1 || IsCharNumeric(sTemp[1])) && (len == 2 || IsCharNumeric(sTemp[2])) )
 		{
 			index = StringToInt(sTemp);
 			if( index < 1 || index >= (g_iCount + 1) )
@@ -1774,7 +1787,7 @@ public Action CmdHatDel(int client, int args)
 					if( StrContains(sModel, sTemp) != -1 )
 					{
 						ReplyToCommand(client, "%sYou have deleted the hat '\x05%s\x03'", CHAT_TAG, sModel);
-						hFile.DeleteKey(sTemp);
+						hFile.DeleteThis();
 
 						g_iCount--;
 						bDeleted = true;
