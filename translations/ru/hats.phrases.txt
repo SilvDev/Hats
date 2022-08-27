@@ -3,7 +3,7 @@
 	"Hat_Wearing"
 	{
 		"#format"		"{1:s}"
-		"ru"			"Вы одели шляпу: {ORANGE}[{1}] {DEFAULT}"
+		"ru"			"Вы надели шляпу: {ORANGE}[{1}] {DEFAULT}"
 	}
 	"Hat_Changed"
 	{
@@ -42,7 +42,7 @@
 	"Hat_Ability"
 	{
 		"#format"		"{1:s}"
-		"ru"			"{DEFAULT}Возможность одевать шапки: {ORANGE}{1}."
+		"ru"			"{DEFAULT}Возможность надевать шапки: {ORANGE}{1}."
 	}
 	"Hat_On"
 	{
@@ -102,7 +102,7 @@
 	}
 	"HAT_WORE"
 	{
-		"ru"			"Одевание шапки"
+		"ru"			"Надевание шапки"
 	}
 	"HAT_VIEWABLE"
 	{
