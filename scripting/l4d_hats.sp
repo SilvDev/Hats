@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.46"
+#define PLUGIN_VERSION 		"1.47"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,10 @@
 
 ========================================================================================
 	Change Log:
+
+1.47 (22-Nov-2023)
+	- Now shows hats in 3rd person view when healing someone, using a generator or opening a footlocker, and possibly more situations. Thanks to "Voevoda" for reporting.
+	- Fixed invalid handle errors caused by the last update. Should have worked, seems to be some weirdness with SourceMod. Thanks to "Voevoda" for reporting and "HarryPotter" for help.
 
 1.46 (07-Nov-2023)
 	- Now shows hats in 3rd person view when deploying upgrade ammo packs, staggering or recovering from a pounce/charge. Thanks to "Voevoda" for reporting.
@@ -1166,23 +1170,23 @@ Action TimerDelayCreate(Handle timer, int client)
 
 void Event_FirstDelay(Event event, const char[] name, bool dontBroadcast)
 {
-	int userid = event.GetInt("victim");
-	int client = GetClientOfUserId(userid);
+	int client = GetClientOfUserId(event.GetInt("victim"));
+	if( client )
+	{
+		delete g_hTimerDelay[client];
 
-	delete g_hTimerDelay[client];
-
-	if( name[0] == 'c' ) // charger_pummel_end
-		g_hTimerDelay[client] = CreateTimer(3.0, TimerDelayFirst, userid);
-	else // pounce_end .. if( name[0] == 'p' ) 
-		g_hTimerDelay[client] = CreateTimer(2.5, TimerDelayFirst, userid);
+		if( name[0] == 'c' ) // charger_pummel_end
+			g_hTimerDelay[client] = CreateTimer(3.0, TimerDelayFirst, client);
+		else // pounce_end .. if( name[0] == 'p' ) 
+			g_hTimerDelay[client] = CreateTimer(2.5, TimerDelayFirst, client);
+	}
 }
 
 Action TimerDelayFirst(Handle timer, int client)
 {
-	client = GetClientOfUserId(client);
 	g_hTimerDelay[client] = null;
 
-	if( client && IsClientInGame(client) )
+	if( IsClientInGame(client) )
 	{
 		EventView(client, false);
 	}
@@ -1234,16 +1238,45 @@ Action TimerDetect(Handle timer)
 		return Plugin_Stop;
 	}
 
+	int target;
+	bool pass;
+
 	for( int i = 1; i <= MaxClients; i++ )
 	{
 		if( g_bExternalCvar[i] == false && g_iHatIndex[i] && IsClientInGame(i) && GetClientTeam(i) == 2 && IsPlayerAlive(i) )
 		{
-			if(
-				(g_bLeft4Dead2 && (GetEntPropFloat(i, Prop_Send, "m_TimeForceExternalView") > GetGameTime() || GetEntPropEnt(i, Prop_Send, "m_useActionTarget") == i))
-				
-				|| GetEntPropEnt(i, Prop_Send, "m_reviveTarget") != -1
-				|| GetEntDataFloat(i, g_iOffsetStagger + 8) > 0.0
-			)
+			if( g_bLeft4Dead2 )
+			{
+				if(
+					GetEntPropFloat(i, Prop_Send, "m_TimeForceExternalView") > GetGameTime() ||
+					GetEntPropEnt(i, Prop_Send, "m_useActionTarget") != -1 ||
+					GetEntProp(i, Prop_Send, "m_iCurrentUseAction") != 0
+				)
+				{
+					pass = true;
+				}
+			}
+			else
+			{
+				target = GetEntPropEnt(i, Prop_Send, "m_healTarget");
+				if( target > 0 && target != i )
+				{
+					pass = true;
+				}
+			}
+
+			if( !pass )
+			{
+				if(
+					GetEntPropEnt(i, Prop_Send, "m_reviveTarget") != -1 ||
+					GetEntDataFloat(i, g_iOffsetStagger + 8) > 0.0
+				)
+				{
+					pass = true;
+				}
+			}
+
+			if( pass )
 			{
 				g_bIsThirdPerson[i] = true;
 
