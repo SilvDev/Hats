@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.47"
+#define PLUGIN_VERSION 		"1.48"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,9 @@
 
 ========================================================================================
 	Change Log:
+
+1.48 (24-Nov-2023)
+	- Fixed the hat showing after staggering when the stagger timer didn't reset (due to some plugins such as "Stagger Gravity").
 
 1.47 (22-Nov-2023)
 	- Now shows hats in 3rd person view when healing someone, using a generator or opening a footlocker, and possibly more situations. Thanks to "Voevoda" for reporting.
@@ -324,7 +327,7 @@ ConVar g_hCvarMPGameMode, g_hPluginReadyUp;
 Handle g_hCookie_Hat, g_hCookie_All;
 Menu g_hMenu, g_hMenus[MAXPLAYERS+1];
 bool g_bCvarAllow, g_bMapStarted, g_bCvarBots, g_bCvarWall, g_bLeft4Dead2, g_bTranslation, g_bViewHooked, g_bValidMap;
-int g_iCount, g_iCvarMake, g_iCvarMenu, g_iCvarOpaq, g_iCvarRand, g_iCvarSave, g_iCvarThird, g_iOffsetStagger;
+int g_iCount, g_iCvarMake, g_iCvarMenu, g_iCvarOpaq, g_iCvarRand, g_iCvarSave, g_iCvarThird;
 float g_fCvarChange, g_fCvarDetect;
 
 float g_fSize[MAX_HATS], g_vAng[MAX_HATS][3], g_vPos[MAX_HATS][3];
@@ -551,8 +554,6 @@ public void OnPluginStart()
 	// Updated by pan0s
 	g_hCookie_FirstView = RegClientCookie("l4d_hats_fv", "Hats First person View", CookieAccess_Protected);
 	g_hCookie_ThirdView = RegClientCookie("l4d_hats_tv", "Hats Third person View", CookieAccess_Protected);
-
-	g_iOffsetStagger = FindSendPropInfo("CTerrorPlayer", "m_staggerTimer");
 }
 
 public void OnPluginEnd()
@@ -1020,12 +1021,12 @@ void HookViewEvents()
 	{
 		g_bViewHooked = true;
 
-		HookEvent("revive_success",			Event_First2);
-		HookEvent("player_ledge_grab",		Event_Third1);
-		HookEvent("lunge_pounce",			Event_Third2);
-		HookEvent("pounce_end",				Event_FirstDelay);
-		HookEvent("tongue_grab",			Event_Third2);
-		HookEvent("tongue_release",			Event_First1);
+		HookEvent("revive_success",					Event_First2);
+		HookEvent("player_ledge_grab",				Event_Third1);
+		HookEvent("lunge_pounce",					Event_Third2);
+		HookEvent("pounce_end",						Event_FirstDelay);
+		HookEvent("tongue_grab",					Event_Third2);
+		HookEvent("tongue_release",					Event_First1);
 
 		if( g_bLeft4Dead2 )
 		{
@@ -1045,12 +1046,12 @@ void UnhookViewEvents()
 	{
 		g_bViewHooked = true;
 
-		UnhookEvent("revive_success",		Event_First2);
-		UnhookEvent("player_ledge_grab",	Event_Third1);
-		UnhookEvent("lunge_pounce",			Event_Third2);
-		UnhookEvent("pounce_end",			Event_FirstDelay);
-		UnhookEvent("tongue_grab",			Event_Third2);
-		UnhookEvent("tongue_release",		Event_First1);
+		UnhookEvent("revive_success",				Event_First2);
+		UnhookEvent("player_ledge_grab",			Event_Third1);
+		UnhookEvent("lunge_pounce",					Event_Third2);
+		UnhookEvent("pounce_end",					Event_FirstDelay);
+		UnhookEvent("tongue_grab",					Event_Third2);
+		UnhookEvent("tongue_release",				Event_First1);
 
 		if( g_bLeft4Dead2 )
 		{
@@ -1249,8 +1250,7 @@ Action TimerDetect(Handle timer)
 			{
 				if(
 					GetEntPropFloat(i, Prop_Send, "m_TimeForceExternalView") > GetGameTime() ||
-					GetEntPropEnt(i, Prop_Send, "m_useActionTarget") != -1 ||
-					GetEntProp(i, Prop_Send, "m_iCurrentUseAction") != 0
+					GetEntPropEnt(i, Prop_Send, "m_useActionTarget") != -1
 				)
 				{
 					pass = true;
@@ -1269,7 +1269,7 @@ Action TimerDetect(Handle timer)
 			{
 				if(
 					GetEntPropEnt(i, Prop_Send, "m_reviveTarget") != -1 ||
-					GetEntDataFloat(i, g_iOffsetStagger + 8) > 0.0
+					GetEntPropFloat(i, Prop_Send, "m_staggerTimer", 1) > GetGameTime()
 				)
 				{
 					pass = true;
