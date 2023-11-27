@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.48"
+#define PLUGIN_VERSION 		"1.49"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,11 @@
 
 ========================================================================================
 	Change Log:
+
+1.49 (27-Nov-2023)
+	- Fixed the hat showing when being healed by someone else.
+	- Fixed hats randomly showing in first person. Thanks to "Yabi" for reporting.
+	- Fixed the "l4d_hats_random" value "2" not saving across map changes. Thanks to "Yabi" for reporting.
 
 1.48 (24-Nov-2023)
 	- Fixed the hat showing after staggering when the stagger timer didn't reset (due to some plugins such as "Stagger Gravity").
@@ -498,7 +503,7 @@ public void OnPluginStart()
 	g_hCvarModesTog = CreateConVar(		"l4d_hats_modes_tog",	"",				"Turn on the plugin in these game modes. 0=All, 1=Coop, 2=Survival, 4=Versus, 8=Scavenge. Add numbers together.", CVAR_FLAGS );
 	g_hCvarOpaq = CreateConVar(			"l4d_hats_opaque",		"255", 			"How transparent or solid should the hats appear. 0=Translucent, 255=Opaque.", CVAR_FLAGS, true, 0.0, true, 255.0 );
 	g_hCvarPrecache = CreateConVar(		"l4d_hats_precache",	"",				"Prevent pre-caching models on these maps, separate by commas (no spaces). Enabling plugin on these maps will crash the server.", CVAR_FLAGS );
-	g_hCvarRand = CreateConVar(			"l4d_hats_random",		"1", 			"Attach a random hat when survivors spawn. 0=Never. 1=On round start. 2=Only first spawn (keeps the same hat next round).", CVAR_FLAGS, true, 0.0, true, 3.0 );
+	g_hCvarRand = CreateConVar(			"l4d_hats_random",		"1", 			"Attach a random hat when survivors spawn. 0=Never. 1=On round start. 2=Only first spawn (keeps the same hat next round).", CVAR_FLAGS, true, 0.0, true, 2.0 );
 	g_hCvarSave = CreateConVar(			"l4d_hats_save",		"1", 			"0=Off, 1=Save the players selected hats and attach when they spawn or rejoin the server. Overrides the random setting.", CVAR_FLAGS, true, 0.0, true, 1.0 );
 	g_hCvarThird = CreateConVar(		"l4d_hats_third",		"1", 			"0=Off, 1=When a player is in third person view, display their hat. Hide when in first person view.", CVAR_FLAGS, true, 0.0, true, 1.0 );
 	g_hCvarWall = CreateConVar(			"l4d_hats_wall",		"1",			"0=Show hats glowing through walls, 1=Hide hats glowing when behind walls (creates 1 extra entity per hat).", CVAR_FLAGS, true, 0.0, true, 1.0 );
@@ -1246,11 +1251,13 @@ Action TimerDetect(Handle timer)
 	{
 		if( g_bExternalCvar[i] == false && g_iHatIndex[i] && IsClientInGame(i) && GetClientTeam(i) == 2 && IsPlayerAlive(i) )
 		{
+			pass = false;
+
 			if( g_bLeft4Dead2 )
 			{
 				if(
 					GetEntPropFloat(i, Prop_Send, "m_TimeForceExternalView") > GetGameTime() ||
-					GetEntPropEnt(i, Prop_Send, "m_useActionTarget") != -1
+					(GetEntPropEnt(i, Prop_Send, "m_useActionTarget") != -1 && GetEntPropEnt(i, Prop_Send, "m_useActionOwner") == i)
 				)
 				{
 					pass = true;
@@ -2707,8 +2714,8 @@ bool CreateHat(int client, int index = -1)
 				return false;
 		}
 
-		index = GetRandomInt(0, g_iCount -1);
-		g_iType[client] = index + 1;
+		index = GetRandomInt(1, g_iCount);
+		g_iType[client] = index;
 	}
 	else if( index == -2 ) // Previous random hat
 	{
@@ -2720,6 +2727,7 @@ bool CreateHat(int client, int index = -1)
 		if( index == 0 )
 		{
 			index = GetRandomInt(1, g_iCount);
+			g_iType[client] = index;
 		}
 
 		index--;
@@ -2740,6 +2748,7 @@ bool CreateHat(int client, int index = -1)
 				if( g_iCvarRand == 0 ) return false;
 
 				index = GetRandomInt(1, g_iCount);
+				g_iType[client] = index;
 			}
 		}
 
