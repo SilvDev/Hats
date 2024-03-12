@@ -1,6 +1,6 @@
 /*
 *	Hats
-*	Copyright (C) 2023 Silvers
+*	Copyright (C) 2024 Silvers
 *
 *	This program is free software: you can redistribute it and/or modify
 *	it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.49"
+#define PLUGIN_VERSION 		"1.50"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,10 @@
 
 ========================================================================================
 	Change Log:
+
+1.50 (12-Mar-2024)
+	- Added a thirdperson camera detection for "m_hViewEntity". Thanks to "Marttt" for reporting.
+	- More fixes to keep the hat visible when changing between thirdperson modes (events, cvar, TP plugin). Thanks to "Yabi" for reporting.
 
 1.49 (27-Nov-2023)
 	- Fixed the hat showing when being healed by someone else.
@@ -1194,7 +1198,7 @@ Action TimerDelayFirst(Handle timer, int client)
 
 	if( IsClientInGame(client) )
 	{
-		EventView(client, false);
+		EventHatView(client, false);
 	}
 
 	return Plugin_Continue;
@@ -1202,30 +1206,53 @@ Action TimerDelayFirst(Handle timer, int client)
 
 void Event_First1(Event event, const char[] name, bool dontBroadcast)
 {
-	EventView(GetClientOfUserId(event.GetInt("victim")), false);
+	EventView(event.GetInt("victim"), false);
 }
 
 void Event_First3(Event event, const char[] name, bool dontBroadcast)
 {
-	EventView(GetClientOfUserId(event.GetInt("userid")), false);
+	EventView(event.GetInt("userid"), false);
 }
 
 void Event_First2(Event event, const char[] name, bool dontBroadcast)
 {
-	EventView(GetClientOfUserId(event.GetInt("subject")), false);
+	EventView(event.GetInt("subject"), false);
 }
 
 void Event_Third1(Event event, const char[] name, bool dontBroadcast)
 {
-	EventView(GetClientOfUserId(event.GetInt("userid")), true);
+	EventView(event.GetInt("userid"), true);
 }
 
 void Event_Third2(Event event, const char[] name, bool dontBroadcast)
 {
-	EventView(GetClientOfUserId(event.GetInt("victim")), true);
+	EventView(event.GetInt("victim"), true);
 }
 
 void EventView(int client, bool bToThirdPerson)
+{
+	DataPack dPack = new DataPack();
+	dPack.WriteCell(client);
+	dPack.WriteCell(bToThirdPerson);
+	RequestFrame(OnFrameEvent, dPack);
+}
+
+void OnFrameEvent(DataPack dPack)
+{
+	dPack.Reset();
+	int client = dPack.ReadCell();
+	bool bToThirdPerson = dPack.ReadCell();
+	delete dPack;
+
+	client = GetClientOfUserId(client);
+
+	if( client && IsClientInGame(client) )
+	{
+		EventHatView(client, bToThirdPerson);
+	}
+}
+
+void EventHatView(int client, bool bToThirdPerson)
 {
 	if( HatsValidClient(client) )
 	{
@@ -1275,6 +1302,7 @@ Action TimerDetect(Handle timer)
 			if( !pass )
 			{
 				if(
+					GetEntPropEnt(i, Prop_Send, "m_hViewEntity") != -1 ||
 					GetEntPropEnt(i, Prop_Send, "m_reviveTarget") != -1 ||
 					GetEntPropFloat(i, Prop_Send, "m_staggerTimer", 1) > GetGameTime()
 				)
@@ -1285,7 +1313,7 @@ Action TimerDetect(Handle timer)
 
 			if( pass )
 			{
-				g_bIsThirdPerson[i] = true;
+				// g_bIsThirdPerson[i] = true;
 
 				if( g_bExternalProp[i] == false )
 				{
@@ -1301,7 +1329,7 @@ Action TimerDetect(Handle timer)
 			}
 			else
 			{
-				g_bIsThirdPerson[i] = false;
+				// g_bIsThirdPerson[i] = false;
 
 				if( g_bExternalProp[i] == true )
 				{
@@ -1329,11 +1357,12 @@ public void TP_OnThirdPersonChanged(int client, bool bIsThirdPerson)
 
 	if( g_fCvarDetect )
 	{
-		if( bIsThirdPerson && g_bExternalCvar[client] )
-		{
-			SetHatView(client, false);
-		}
-		else if( bIsThirdPerson && !g_bExternalCvar[client] )
+		// if( bIsThirdPerson && g_bExternalCvar[client] )
+		// {
+			// SetHatView(client, false);
+		// }
+		// else if( bIsThirdPerson && !g_bExternalCvar[client] )
+		if( bIsThirdPerson && !g_bExternalCvar[client] )
 		{
 			g_bExternalCvar[client] = true;
 			if( g_bHatViewTP[client] ) SetHatView(client, true);
@@ -1351,14 +1380,31 @@ void SetHatView(int client, bool bShowHat)
 {
 	if( bShowHat && !g_bExternalState[client] )
 	{
+		// PrintToChatAll("HatStates On: %d %d %d %d %d %d %d", bShowHat, g_bExternalState[client], g_bExternalChange[client], g_bExternalProp[client], g_bHatView[client], g_bIsThirdPerson[client], g_bHatViewTP[client]);
 		g_bExternalState[client] = true;
 
 		int entity = g_iHatIndex[client];
 		if( entity && (entity = EntRefToEntIndex(entity)) != INVALID_ENT_REFERENCE )
 			SDKUnhook(entity, SDKHook_SetTransmit, Hook_SetTransmit);
 	}
-	else if( !bShowHat && g_bExternalState[client] && !g_bExternalChange[client] && ((!g_bHatView[client] && !g_bIsThirdPerson[client]) || (!g_bHatViewTP[client] && g_bIsThirdPerson[client])) )
+	else if( !bShowHat && g_bExternalState[client] && !g_bExternalChange[client] && !g_bExternalProp[client] && ((!g_bHatView[client] && !g_bIsThirdPerson[client]) || (!g_bHatViewTP[client] && g_bIsThirdPerson[client])) )
 	{
+		// Prevent hiding the hat if events are currently triggered to show:
+		if(
+			GetEntProp(client, Prop_Send, "m_isHangingFromLedge") == 1 ||
+			GetEntPropEnt(client, Prop_Send, "m_reviveTarget") != -1 ||
+			GetEntPropEnt(client, Prop_Send, "m_pounceAttacker") != -1 ||
+			GetEntPropEnt(client, Prop_Send, "m_hViewEntity") != -1 ||
+			(
+				g_bLeft4Dead2 &&
+				(GetEntPropEnt(client, Prop_Send, "m_carryAttacker") != -1 || GetEntPropEnt(client, Prop_Send, "m_pummelAttacker") != -1)
+			)
+		)
+		{
+			return;
+		}
+
+		// PrintToChatAll("HatStates Off: %d %d %d %d %d %d %d", bShowHat, g_bExternalState[client], g_bExternalChange[client], g_bExternalProp[client], g_bHatView[client], g_bIsThirdPerson[client], g_bHatViewTP[client]);
 		g_bExternalState[client] = false;
 
 		int entity = g_iHatIndex[client];
@@ -2860,7 +2906,7 @@ void ExternalView(int client)
 {
 	if( g_fCvarChange && g_bLeft4Dead2 )
 	{
-		EventView(client, true);
+		EventHatView(client, true);
 
 		g_bExternalChange[client] = true;
 
@@ -2881,7 +2927,7 @@ Action TimerEventView(Handle timer, int client)
 		g_hTimerView[client] = null;
 		g_bExternalChange[client] = false;
 
-		EventView(client, false);
+		EventHatView(client, false);
 	}
 
 	return Plugin_Continue;
