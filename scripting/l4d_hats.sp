@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.50"
+#define PLUGIN_VERSION 		"1.51"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,11 @@
 
 ========================================================================================
 	Change Log:
+
+1.51 (31-May-2024)
+	- Fixed client not in game errors being thrown on player death. Thanks to "lzvs" for reporting.
+	- Fixed invalid entity errors being thrown. Thanks to "Voevoda" for reporting.
+	- Added Spanish translations. Thanks to "lechuga" for providing.
 
 1.50 (12-Mar-2024)
 	- Added a thirdperson camera detection for "m_hViewEntity". Thanks to "Marttt" for reporting.
@@ -1109,7 +1114,7 @@ void Event_RoundEnd(Event event, const char[] name, bool dontBroadcast)
 void Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast)
 {
 	int client = GetClientOfUserId(event.GetInt("userid"));
-	if( !client || GetClientTeam(client) != 2 )
+	if( !client || !IsClientInGame(client) || GetClientTeam(client) != 2 )
 		return;
 
 	RemoveHat(client);
@@ -1456,7 +1461,9 @@ void OnFrameHooks(DataPack dPack)
 	if( client && IsClientInGame(client) && !IsPlayerAlive(client) )
 	{
 		int index = dPack.ReadCell();
-		SDKHook(EntRefToEntIndex(g_iHatIndex[index]), SDKHook_SetTransmit, Hook_SetSpecTransmit);
+		int entity = EntRefToEntIndex(g_iHatIndex[index]);
+		if( entity != INVALID_ENT_REFERENCE )
+			SDKHook(entity, SDKHook_SetTransmit, Hook_SetSpecTransmit);
 	}
 
 	delete dPack;
