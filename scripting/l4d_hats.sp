@@ -1,6 +1,6 @@
 /*
 *	Hats
-*	Copyright (C) 2024 Silvers
+*	Copyright (C) 2025 Silvers
 *
 *	This program is free software: you can redistribute it and/or modify
 *	it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.51"
+#define PLUGIN_VERSION 		"1.52"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,9 @@
 
 ========================================================================================
 	Change Log:
+
+1.52 (04-Jan-2025)
+	- Fixed ledge release not removing the hat view. Thanks to "Voevoda" for reporting.
 
 1.51 (31-May-2024)
 	- Fixed client not in game errors being thrown on player death. Thanks to "lzvs" for reporting.
@@ -1037,6 +1040,7 @@ void HookViewEvents()
 
 		HookEvent("revive_success",					Event_First2);
 		HookEvent("player_ledge_grab",				Event_Third1);
+		HookEvent("player_ledge_release",			Event_First3);
 		HookEvent("lunge_pounce",					Event_Third2);
 		HookEvent("pounce_end",						Event_FirstDelay);
 		HookEvent("tongue_grab",					Event_Third2);
@@ -1062,6 +1066,7 @@ void UnhookViewEvents()
 
 		UnhookEvent("revive_success",				Event_First2);
 		UnhookEvent("player_ledge_grab",			Event_Third1);
+		UnhookEvent("player_ledge_release",			Event_First3);
 		UnhookEvent("lunge_pounce",					Event_Third2);
 		UnhookEvent("pounce_end",					Event_FirstDelay);
 		UnhookEvent("tongue_grab",					Event_Third2);
