@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.52"
+#define PLUGIN_VERSION 		"1.53"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,10 @@
 
 ========================================================================================
 	Change Log:
+
+1.53 (21-Mar-2025)
+	- Fixed the plugin resetting a clients "l4d_hats_all" cookie setting. Thanks to "Voevoda" for reporting.
+	- Fixed error thrown on SM 1.12 due to incorrect string size.
 
 1.52 (04-Jan-2025)
 	- Fixed ledge release not removing the hat view. Thanks to "Voevoda" for reporting.
@@ -819,7 +823,7 @@ public void OnMapEnd()
 	g_bMapStarted = false;
 }
 
-public void OnClientPutInServer(int client)
+public void OnClientConnected(int client)
 {
 	g_iMenuType[client] = 0;
 	g_bHatAll[client] = true;
@@ -3141,7 +3145,7 @@ stock void TranslateHatnames()
 {
 	int maxIndex = 95; // Searches from "1" to maxIndex (including max) in the "hatnames" file. Matches to the data config.
 
-	char sLang[4] = "zho/"; // Language folder to translate. Blank for "en"
+	char sLang[5] = "zho/"; // Language folder to translate. Blank for "en"
 	char sText[256];
 	char sModel[PLATFORM_MAX_PATH];
 	char sTran[PLATFORM_MAX_PATH];
@@ -3171,8 +3175,6 @@ stock void TranslateHatnames()
 		Format(sIndex, sizeof sIndex, "Hat %d", i);
 		hTran.JumpToKey(sIndex);
 		hTran.GetString(sLang, sText, sizeof(sText));
-
-		PrintToServer("%02d (%s) [%s] == [%s]", i, sIndex, sModel, sText);
 
 		hSave.JumpToKey(sModel, true);
 		hSave.SetString(sLang, sText);
