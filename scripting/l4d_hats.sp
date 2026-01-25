@@ -1,6 +1,6 @@
 /*
 *	Hats
-*	Copyright (C) 2025 Silvers
+*	Copyright (C) 2026 Silvers
 *
 *	This program is free software: you can redistribute it and/or modify
 *	it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.53"
+#define PLUGIN_VERSION 		"1.54"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,9 @@
 
 ========================================================================================
 	Change Log:
+
+1.54 (25-Jan-2026)
+	- Added cvar "l4d_hats_notify" to reduce chat notifications about hats. Requested by "S.A.S".
 
 1.53 (21-Mar-2025)
 	- Fixed the plugin resetting a clients "l4d_hats_all" cookie setting. Thanks to "Voevoda" for reporting.
@@ -343,12 +346,12 @@ bool g_bIsThirdPerson[MAXPLAYERS+1];	// View on TP
 bool g_bHatViewTP[MAXPLAYERS+1];		// View on TP
 //////////////////////////////////
 
-ConVar g_hCvarAllow, g_hCvarBots, g_hCvarChange, g_hCvarDetect, g_hCvarMake, g_hCvarMenu, g_hCvarModes, g_hCvarModesOff, g_hCvarModesTog, g_hCvarOpaq, g_hCvarPrecache, g_hCvarRand, g_hCvarSave, g_hCvarThird, g_hCvarWall;
+ConVar g_hCvarAllow, g_hCvarBots, g_hCvarChange, g_hCvarDetect, g_hCvarMake, g_hCvarMenu, g_hCvarModes, g_hCvarModesOff, g_hCvarModesTog, g_hCvarNotify, g_hCvarOpaq, g_hCvarPrecache, g_hCvarRand, g_hCvarSave, g_hCvarThird, g_hCvarWall;
 ConVar g_hCvarMPGameMode, g_hPluginReadyUp;
 Handle g_hCookie_Hat, g_hCookie_All;
 Menu g_hMenu, g_hMenus[MAXPLAYERS+1];
 bool g_bCvarAllow, g_bMapStarted, g_bCvarBots, g_bCvarWall, g_bLeft4Dead2, g_bTranslation, g_bViewHooked, g_bValidMap;
-int g_iCount, g_iCvarMake, g_iCvarMenu, g_iCvarOpaq, g_iCvarRand, g_iCvarSave, g_iCvarThird;
+int g_iCount, g_iCvarMake, g_iCvarMenu, g_iCvarNotify, g_iCvarOpaq, g_iCvarRand, g_iCvarSave, g_iCvarThird;
 float g_fCvarChange, g_fCvarDetect;
 
 float g_fSize[MAX_HATS], g_vAng[MAX_HATS][3], g_vPos[MAX_HATS][3];
@@ -517,6 +520,7 @@ public void OnPluginStart()
 	g_hCvarModes = CreateConVar(		"l4d_hats_modes",		"",				"Turn on the plugin in these game modes, separate by commas (no spaces). (Empty = all).", CVAR_FLAGS );
 	g_hCvarModesOff = CreateConVar(		"l4d_hats_modes_off",	"",				"Turn off the plugin in these game modes, separate by commas (no spaces). (Empty = none).", CVAR_FLAGS );
 	g_hCvarModesTog = CreateConVar(		"l4d_hats_modes_tog",	"",				"Turn on the plugin in these game modes. 0=All, 1=Coop, 2=Survival, 4=Versus, 8=Scavenge. Add numbers together.", CVAR_FLAGS );
+	g_hCvarNotify = CreateConVar(		"l4d_hats_notify",		"0", 			"0=Off. 1=Notify a player when their hat spawns or changes. Always shows when manually changing.", CVAR_FLAGS );
 	g_hCvarOpaq = CreateConVar(			"l4d_hats_opaque",		"255", 			"How transparent or solid should the hats appear. 0=Translucent, 255=Opaque.", CVAR_FLAGS, true, 0.0, true, 255.0 );
 	g_hCvarPrecache = CreateConVar(		"l4d_hats_precache",	"",				"Prevent pre-caching models on these maps, separate by commas (no spaces). Enabling plugin on these maps will crash the server.", CVAR_FLAGS );
 	g_hCvarRand = CreateConVar(			"l4d_hats_random",		"1", 			"Attach a random hat when survivors spawn. 0=Never. 1=On round start. 2=Only first spawn (keeps the same hat next round).", CVAR_FLAGS, true, 0.0, true, 2.0 );
@@ -537,6 +541,7 @@ public void OnPluginStart()
 	g_hCvarDetect.AddChangeHook(ConVarChanged_Cvars);
 	g_hCvarMake.AddChangeHook(ConVarChanged_Cvars);
 	g_hCvarMenu.AddChangeHook(ConVarChanged_Cvars);
+	g_hCvarNotify.AddChangeHook(ConVarChanged_Cvars);
 	g_hCvarRand.AddChangeHook(ConVarChanged_Cvars);
 	g_hCvarSave.AddChangeHook(ConVarChanged_Cvars);
 	g_hCvarWall.AddChangeHook(ConVarChanged_Cvars);
@@ -612,6 +617,7 @@ void GetCvars()
 	g_bCvarBots = g_hCvarBots.BoolValue;
 	g_fCvarChange = g_hCvarChange.FloatValue;
 	g_fCvarDetect = g_hCvarDetect.FloatValue;
+	g_iCvarNotify = g_hCvarNotify.IntValue;
 	g_iCvarOpaq = g_hCvarOpaq.IntValue;
 	g_iCvarRand = g_hCvarRand.IntValue;
 	g_iCvarSave = g_hCvarSave.IntValue;
@@ -1201,7 +1207,7 @@ void Event_FirstDelay(Event event, const char[] name, bool dontBroadcast)
 
 		if( name[0] == 'c' ) // charger_pummel_end
 			g_hTimerDelay[client] = CreateTimer(3.0, TimerDelayFirst, client);
-		else // pounce_end .. if( name[0] == 'p' ) 
+		else // pounce_end .. if( name[0] == 'p' )
 			g_hTimerDelay[client] = CreateTimer(2.5, TimerDelayFirst, client);
 	}
 }
@@ -1643,7 +1649,7 @@ Action CmdHat(int client, int args)
 
 					CPrintToChat(client, "%T%T", "HAT_SYSTEM", client, "Hat_Off", client);
 				}
-				else if( CreateHat(client, index - 1) )
+				else if( CreateHat(client, index - 1, true) )
 				{
 					ExternalView(client);
 				}
@@ -1653,7 +1659,7 @@ Action CmdHat(int client, int args)
 		{
 			RemoveHat(client);
 
-			if( CreateHat(client, GetRandomInt(1, g_iCount) - 1) )
+			if( CreateHat(client, GetRandomInt(1, g_iCount) - 1, true) )
 			{
 				ExternalView(client);
 				return Plugin_Handled;
@@ -1669,7 +1675,7 @@ Action CmdHat(int client, int args)
 				{
 					RemoveHat(client);
 
-					if( CreateHat(client, i) )
+					if( CreateHat(client, i, true) )
 					{
 						ExternalView(client);
 					}
@@ -1712,7 +1718,7 @@ int HatMenuHandler(Menu menu, MenuAction action, int client, int index)
 				CPrintToChat(client, "%T%T", "HAT_SYSTEM", client, "Hat_Changed", client, name);
 				RemoveHat(target);
 
-				if( index != 0 && CreateHat(target, index - 1) )
+				if( index != 0 && CreateHat(target, index - 1, true) )
 				{
 					ExternalView(target);
 				}
@@ -1742,7 +1748,7 @@ int HatMenuHandler(Menu menu, MenuAction action, int client, int index)
 
 				CPrintToChat(client, "%T%T", "HAT_SYSTEM", client, "Hat_Off", client);
 			}
-			else if( CreateHat(client, index - 1) )
+			else if( CreateHat(client, index - 1, true) )
 			{
 				ExternalView(client);
 			}
@@ -2756,7 +2762,7 @@ void RemoveHat(int client)
 		RemoveEntity(entity);
 }
 
-bool CreateHat(int client, int index = -1)
+bool CreateHat(int client, int index = -1, bool notify = false)
 {
 	if( g_bBlocked[client] || g_bHatOff[client] || IsValidEntRef(g_iHatIndex[client]) == true || HatsValidClient(client) == false )
 		return false;
@@ -2765,16 +2771,6 @@ bool CreateHat(int client, int index = -1)
 	{
 		if( g_iCvarRand == 0 ) return false;
 		if( g_iType[client] == -1 ) return false;
-
-		if( g_iCvarMenu != 0 )
-		{
-			if( IsFakeClient(client) )
-				return false;
-
-			int flags = GetUserFlagBits(client);
-			if( !(flags & ADMFLAG_ROOT) && !(flags & g_iCvarMenu) )
-				return false;
-		}
 
 		index = GetRandomInt(1, g_iCount);
 		g_iType[client] = index;
@@ -2909,7 +2905,10 @@ bool CreateHat(int client, int index = -1)
 			SetHatView(client, true);
 		}
 
-		TranslateHatName(client, index);
+		if( g_iCvarNotify || notify )
+		{
+			TranslateHatName(client, index);
+		}
 
 		SpectatorHatHooks();
 		return true;
