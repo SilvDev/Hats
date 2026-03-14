@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.54"
+#define PLUGIN_VERSION 		"1.55"
 
 /*======================================================================================
 	Plugin Info:
@@ -31,6 +31,10 @@
 
 ========================================================================================
 	Change Log:
+
+1.55 (14-Mar-2026)
+	- Plugin now attaches the hat to cloned Survivors when using "Incapped Crawling", "Climb Everywhere" and "Fortnite Emotes" plugins. Thanks to "Voevoda" for reporting and testing.
+	- Fixed code that was removed last update, to prevent hats when the "l4d_hats_make" cvar is set. Thanks to "Hawkins" for reporting.
 
 1.54 (25-Jan-2026)
 	- Added cvar "l4d_hats_notify" to reduce chat notifications about hats. Requested by "S.A.S".
@@ -336,6 +340,15 @@
 #define CONFIG_SPAWNS		"data/l4d_hats.cfg"
 #define	MAX_HATS			128
 
+#define HIDEHUD_CROSSHAIR	(1 << 8)
+
+enum
+{
+	FIX_CRAWLING = 0,
+	FIX_CLIMBING,
+	FIX_EMOTES
+}
+
 
 
 //////////////////////////////////
@@ -359,10 +372,11 @@ char g_sModels[MAX_HATS][64], g_sNames[MAX_HATS][64];
 char g_sFlagsMake[32];
 char g_sFlagsMenu[32];
 char g_sSteamID[MAXPLAYERS+1][32];		// Stores client user id to determine if the blocked player is the same
+int g_iParented[MAXPLAYERS+1];			// Parented to another entity that is parented to clients (e.g. "Incapped Crawling" or "Fortnite Emotes" plugins
 int g_iHatIndex[MAXPLAYERS+1];			// Player hat entity reference
 int g_iHatWalls[MAXPLAYERS+1];			// Hidden hat entity reference
 int g_iSelected[MAXPLAYERS+1];			// The selected hat index (0 to MAX_HATS)
-int g_iTarget[MAXPLAYERS+1];			// For admins to change clients hats
+int g_iTarget[MAXPLAYERS+1];				// For admins to change clients hats
 int g_iType[MAXPLAYERS+1];				// Stores selected hat to give players
 int g_iMenuType[MAXPLAYERS+1];			// Admin var for menu
 bool g_bHatAll[MAXPLAYERS+1] = {true, ...};			// Visibility of everyones hats (personal setting)
@@ -559,7 +573,7 @@ public void OnPluginStart()
 	RegConsoleCmd("sm_hatshowon",	CmdHatShowOn,						"See your own hat. Applies to first person view or third person using the optional command argument \"tp\" e.g. \"sm_hatshowon tp\"");
 	RegConsoleCmd("sm_hatshowoff",	CmdHatShowOff,						"Hide your own hat. Applies to first person view or third person using the optional command argument \"tp\" e.g. \"sm_hatshowoff tp\"");
 	RegConsoleCmd("sm_hatall",		CmdHatsToggle,						"Toggles the visibility of everyone's hats.");
-	RegAdminCmd("sm_hatclient",		CmdHatClient,		ADMFLAG_ROOT,	"Set a clients hat. Usage: sm_hatclient <#userid|name> [hat name or hat index: 0-128 (MAX_HATS)].");
+	RegAdminCmd("sm_hatclient",		CmdHatClient,		ADMFLAG_ROOT,	"Set a clients hat. Usage: sm_hatclient <#userid|name> [hat name or hat index: 0-128 (MAX_HATS) or blank for random].");
 	RegAdminCmd("sm_hatoffc",		CmdHatOffTarget,	ADMFLAG_ROOT,	"Toggle the ability of wearing hats on specific players.");
 	RegAdminCmd("sm_hatallc",		CmdHatAllTarget,	ADMFLAG_ROOT,	"Toggle the visibility of all hats on specific players.");
 	RegAdminCmd("sm_hatc",			CmdHatTarget,		ADMFLAG_ROOT,	"Displays a menu listing players, select one to change their hat.");
@@ -1282,6 +1296,87 @@ void EventHatView(int client, bool bToThirdPerson)
 	}
 }
 
+bool AttachToParent(int client, int type)
+{
+	// Already attached, ignore
+	if( IsValidEntRef(g_iParented[client]) ) return true;
+
+	// Verify hat exists
+	int entity = g_iHatIndex[client];
+	if( EntRefToEntIndex(entity) == INVALID_ENT_REFERENCE )
+	{
+		RemoveHat(client);
+		CreateHat(client, g_iSelected[client]);
+		entity = g_iHatIndex[client];
+	}
+
+	int parent;
+	static char sModel[64];
+	static char sChar[64];
+	float vPos[3];
+	float vEnd[3];
+
+	// Get Survivors model
+	GetEntPropString(client, Prop_Data, "m_ModelName", sChar, sizeof(sChar));
+	if( type == FIX_CLIMBING )
+	{
+		GetClientAbsOrigin(client, vPos);
+	}
+
+	// Loop entities
+	int i = -1;
+	while( (i = FindEntityByClassname(i, "commentary_dummy")) != INVALID_ENT_REFERENCE )
+	{
+		if( type != FIX_CLIMBING )
+		{
+			// Check if entity is parented to a player ("Incapped Crawling" and "Fortnite Emotes" plugins attach to clone)
+			if( IsValidEdict(i) && HasEntProp(i, Prop_Send, "moveparent") )
+			{
+				parent = GetEntPropEnt(i, Prop_Send, "moveparent");
+
+				while( parent > MaxClients )
+				{
+					if( HasEntProp(parent, Prop_Send, "moveparent") )
+						parent = GetEntPropEnt(parent, Prop_Send, "moveparent");
+					else
+						break;
+				}
+			}
+		}
+		else
+		{
+			// Check if entity is near to a player ("Climb Everywhere" plugin does not attach entity)
+			GetEntPropVector(i, Prop_Send, "m_vecOrigin", vEnd);
+			if( GetVectorDistance(vPos, vEnd) < 10.0 )
+			{
+				parent = client;
+			}
+		}
+
+		// Verify matched to client
+		if( parent == client )
+		{
+			// Match entity model to Survivor model
+			GetEntPropString(i, Prop_Data, "m_ModelName", sModel, sizeof(sModel));
+			if( strcmp(sModel, sChar) == 0 )
+			{
+				// Parent hat to this new, temporary, model
+				g_iParented[client] = EntIndexToEntRef(i);
+				int index = g_iSelected[client];
+				SetVariantString("!activator");
+				AcceptEntityInput(entity, "SetParent", i);
+				SetVariantString("eyes");
+				AcceptEntityInput(entity, "SetParentAttachment");
+				TeleportEntity(entity, g_vPos[index], g_vAng[index], NULL_VECTOR);
+
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 // Show hat when thirdperson view
 Action TimerDetect(Handle timer)
 {
@@ -1292,19 +1387,20 @@ Action TimerDetect(Handle timer)
 	}
 
 	int target;
+	int index;
 	bool pass;
 
-	for( int i = 1; i <= MaxClients; i++ )
+	for( int client = 1; client <= MaxClients; client++ )
 	{
-		if( g_bExternalCvar[i] == false && g_iHatIndex[i] && IsClientInGame(i) && GetClientTeam(i) == 2 && IsPlayerAlive(i) )
+		if( g_bExternalCvar[client] == false && g_iHatIndex[client] && IsClientInGame(client) && GetClientTeam(client) == 2 && IsPlayerAlive(client) )
 		{
 			pass = false;
 
 			if( g_bLeft4Dead2 )
 			{
 				if(
-					GetEntPropFloat(i, Prop_Send, "m_TimeForceExternalView") > GetGameTime() ||
-					(GetEntPropEnt(i, Prop_Send, "m_useActionTarget") != -1 && GetEntPropEnt(i, Prop_Send, "m_useActionOwner") == i)
+					GetEntPropFloat(client, Prop_Send, "m_TimeForceExternalView") > GetGameTime() ||
+					(GetEntPropEnt(client, Prop_Send, "m_useActionTarget") != -1 && GetEntPropEnt(client, Prop_Send, "m_useActionOwner") == client)
 				)
 				{
 					pass = true;
@@ -1312,8 +1408,8 @@ Action TimerDetect(Handle timer)
 			}
 			else
 			{
-				target = GetEntPropEnt(i, Prop_Send, "m_healTarget");
-				if( target > 0 && target != i )
+				target = GetEntPropEnt(client, Prop_Send, "m_healTarget");
+				if( target > 0 && target != client )
 				{
 					pass = true;
 				}
@@ -1322,46 +1418,79 @@ Action TimerDetect(Handle timer)
 			if( !pass )
 			{
 				if(
-					GetEntPropEnt(i, Prop_Send, "m_hViewEntity") != -1 ||
-					GetEntPropEnt(i, Prop_Send, "m_reviveTarget") != -1 ||
-					GetEntPropFloat(i, Prop_Send, "m_staggerTimer", 1) > GetGameTime()
+					GetEntPropEnt(client, Prop_Send, "m_hViewEntity") != -1 ||
+					GetEntPropEnt(client, Prop_Send, "m_reviveTarget") != -1 ||
+					GetEntPropFloat(client, Prop_Send, "m_staggerTimer", 1) > GetGameTime()
 				)
 				{
 					pass = true;
 				}
 			}
 
-			if( pass )
+			// Attach Hat to clone model when using "Incapped Crawling", "Climb Everywhere" and "Fortnite Emotes" plugins
+			if( GetEntProp(client, Prop_Send, "m_bDrawViewmodel") == 0 )
 			{
-				// g_bIsThirdPerson[i] = true;
-
-				if( g_bExternalProp[i] == false )
+				if( GetEntProp(client, Prop_Send, "m_isIncapacitated", 1) == 1 )
 				{
-					g_bExternalProp[i] = true;
-
-					if( g_bHatViewTP[i] )
+					pass = AttachToParent(client, FIX_CRAWLING);
+				}
+				else if( GetEntProp(client, Prop_Send, "m_iObserverMode") == 1 )
+				{
+					// Bad identifier for "Fortnite Emotes" plugin, should really just check all attached and failing that search for nearby clones
+					if( GetEntProp(client, Prop_Send, "m_iHideHUD") & HIDEHUD_CROSSHAIR == HIDEHUD_CROSSHAIR )
 					{
-						SetHatView(i, true);
-					} else {
-						SetHatView(i, false);
+						pass = AttachToParent(client, FIX_EMOTES);
+					}
+					else
+					{
+						pass = AttachToParent(client, FIX_CLIMBING);
 					}
 				}
 			}
 			else
 			{
-				// g_bIsThirdPerson[i] = false;
-
-				if( g_bExternalProp[i] == true )
+				// Was using above plugins and crawling or climbing stops, the attached hat is deleted, re-create
+				if( g_iParented[client] )
 				{
-					g_bExternalProp[i] = false;
+					g_iParented[client] = 0;
 
-					if( !g_bHatView[i] )
+					index = g_iSelected[client];
+					RemoveHat(client);
+					CreateHat(client, index);
+				}
+			}
+
+			if( pass )
+			{
+				// g_bIsThirdPerson[client] = true;
+
+				if( g_bExternalProp[client] == false )
+				{
+					g_bExternalProp[client] = true;
+
+					if( g_bHatViewTP[client] )
 					{
-						SetHatView(i, false);
+						SetHatView(client, true);
+					} else {
+						SetHatView(client, false);
+					}
+				}
+			}
+			else
+			{
+				// g_bIsThirdPerson[client] = false;
+
+				if( g_bExternalProp[client] == true )
+				{
+					g_bExternalProp[client] = false;
+
+					if( !g_bHatView[client] )
+					{
+						SetHatView(client, false);
 					}
 					else
 					{
-						SetHatView(i, true);
+						SetHatView(client, true);
 					}
 				}
 			}
@@ -1549,7 +1678,7 @@ Action CmdHatMain(int client, int args)
 	Format(option, sizeof(option), "%T", options[0], client);
 	menu.AddItem("option0", option);
 
-	for( int i=0; i < sizeof(bEnabled); i++ )
+	for( int i = 0; i < sizeof(bEnabled); i++ )
 	{
 		Format(option, sizeof(option), "%T: %T", options[i+1], client, bEnabled[i] ? "HAT_ENABLED" : "HAT_DISABLED", client);
 		Format(optionName, sizeof(optionName),"option%d", i);
@@ -1631,7 +1760,7 @@ Action CmdHat(int client, int args)
 		if( len < 4 && IsCharNumeric(sTemp[0]) && (len == 1 || IsCharNumeric(sTemp[1])) && (len == 2 || IsCharNumeric(sTemp[2])) )
 		{
 			int index = StringToInt(sTemp);
-			if( index < 0 || index >= (g_iCount + 1) )
+			if( index < 0 || index > g_iCount )
 			{
 				CPrintToChat(client, "%T%T", "HAT_SYSTEM", client, "Hat_No_Index", client, index, g_iCount);
 			}
@@ -1988,7 +2117,7 @@ Action CmdHatClient(int client, int args)
 {
 	if( args == 0 )
 	{
-		ReplyToCommand(client, "Usage: sm_hatclient <#userid|name> [hat name or hat index: 0-128 (MAX_HATS)].");
+		ReplyToCommand(client, "Usage: sm_hatclient <#userid|name> [hat name or hat index: 0-128 (MAX_HATS) or blank for random].");
 		return Plugin_Handled;
 	}
 
@@ -2027,14 +2156,15 @@ Action CmdHatClient(int client, int args)
 					break;
 				}
 			}
-		} else {
+		}
+		else
+		{
 			index = StringToInt(sArg);
 		}
 	}
-	else
-	{
+
+	if( index < 0 || index > g_iCount )
 		index = GetRandomInt(0, g_iCount - 1);
-	}
 
 	for( int i = 0; i < target_count; i++ )
 	{
@@ -2771,6 +2901,16 @@ bool CreateHat(int client, int index = -1, bool notify = false)
 	{
 		if( g_iCvarRand == 0 ) return false;
 		if( g_iType[client] == -1 ) return false;
+
+		if( g_iCvarMake != 0 )
+		{
+			if( IsFakeClient(client) )
+				return false;
+
+			int flags = GetUserFlagBits(client);
+			if( !(flags & ADMFLAG_ROOT) && !(flags & g_iCvarMake) )
+				return false;
+		}
 
 		index = GetRandomInt(1, g_iCount);
 		g_iType[client] = index;
